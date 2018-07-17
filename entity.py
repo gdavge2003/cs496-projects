@@ -7,7 +7,7 @@ import json
 # entity classes
 class DepartureHistory(ndb.Model):
     departure_date = ndb.StringProperty()
-    depature_boat = ndb.StringProperty()
+    departure_boat = ndb.StringProperty()
 
 
 class Boat(ndb.Model):
