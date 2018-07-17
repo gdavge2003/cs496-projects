@@ -24,12 +24,13 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/deleteall",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/deleteall",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"deleteall"
 					]
@@ -67,12 +68,13 @@
 					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/boats",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/boats",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"boats"
 					]
@@ -129,12 +131,13 @@
 					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/boats",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/boats",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"boats"
 					]
@@ -169,12 +172,13 @@
 					"raw": "{\"name\":\"BBBBB\",\"type\":\"Support\",\"length\":10}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/boats",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/boats",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"boats"
 					]
@@ -209,12 +213,13 @@
 					"raw": "{\"name\":\"CCCCC\",\"type\":\"Submarine\",\"length\":23}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/boats",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/boats",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"boats"
 					]
@@ -252,12 +257,13 @@
 					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/boats/",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/boats/",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"boats",
 						""
@@ -315,12 +321,13 @@
 					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/boats/{{boat_1_id}}",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/boats/{{boat_1_id}}",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"boats",
 						"{{boat_1_id}}"
@@ -359,12 +366,13 @@
 					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips"
 					]
@@ -374,6 +382,19 @@
 		},
 		{
 			"name": "create slip 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b524f2d-43bf-45bf-98ff-8ffba1817122",
+						"type": "text/javascript",
+						"exec": [
+							"//retrieve gist ID for editing in another request",
+							"pm.environment.set('slip_1_id', pm.response.json().id);"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -387,12 +408,13 @@
 					"raw": "{\"number\":111}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips"
 					]
@@ -428,12 +450,13 @@
 					"raw": "{\"number\":222}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips"
 					]
@@ -469,12 +492,13 @@
 					"raw": "{\"number\":333}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips"
 					]
@@ -512,12 +536,13 @@
 					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips"
 					]
@@ -575,12 +600,13 @@
 					"raw": "{\"number\":111}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips/{{slip_1_id}}",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips/{{slip_1_id}}",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips",
 						"{{slip_1_id}}"
@@ -618,12 +644,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips/{{slip_1_id}}/boat",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips/{{slip_1_id}}/boat",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips",
 						"{{slip_1_id}}",
@@ -683,12 +710,13 @@
 					"raw": "{\"boat_id\":\"{{boat_1_id}}\",\"arrival_date\":\"2018-01-20\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips/{{slip_1_id}}/boat",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips/{{slip_1_id}}/boat",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips",
 						"{{slip_1_id}}",
@@ -727,12 +755,13 @@
 					"raw": "{\"boat_id\":\"{{boat_2_id}}\",\"arrival_date\":\"2018-01-21\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips/{{slip_1_id}}/boat",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips/{{slip_1_id}}/boat",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips",
 						"{{slip_1_id}}",
@@ -791,12 +820,13 @@
 					"raw": "{\"boat_id\":\"{{boat_1_id}}\",\"arrival_date\":\"2018-01-20\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips/{{slip_1_id}}/boat",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips/{{slip_1_id}}/boat",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips",
 						"{{slip_1_id}}",
@@ -835,12 +865,13 @@
 					"raw": "{\"boat_id\":\"{{boat_1_id}}\",\"arrival_date\":\"2018-01-20\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips/{{slip_2_id}}/boat",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips/{{slip_2_id}}/boat",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips",
 						"{{slip_2_id}}",
@@ -905,12 +936,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips/{{slip_1_id}}/boat",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips/{{slip_1_id}}/boat",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips",
 						"{{slip_1_id}}",
@@ -950,12 +982,13 @@
 					"raw": "{\"number\":66789}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips/{{slip_1_id}}",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips/{{slip_1_id}}",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips",
 						"{{slip_1_id}}"
@@ -970,18 +1003,18 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "52c431d7-7c76-4d68-9754-86c9def4182a",
+						"id": "d01ef6ec-4b34-4a4d-b07b-354705def93a",
 						"type": "text/javascript",
 						"exec": [
 							"",
 							"pm.test(\"Name matches\", function() {",
 							"    let name = pm.response.json().name;",
-							"    pm.expect('Braveheart').to.equal(name);",
+							"    pm.expect('ASDF').to.equal(name);",
 							"});",
 							"",
 							"pm.test(\"Type matches\", function() {",
-							"    let name = pm.response.json().type;",
-							"    pm.expect('Vanguard').to.equal(name);",
+							"    let name = pm.response.json().length;",
+							"    pm.expect(239).to.equal(name);",
 							"});"
 						]
 					}
@@ -1000,12 +1033,13 @@
 					"raw": "{\"name\":\"ASDF\",\"length\":239}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/boats/{{boat_1_id}}",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/boats/{{boat_1_id}}",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"boats",
 						"{{boat_1_id}}"
@@ -1041,12 +1075,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/boats/{{boat_2_id}}",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/boats/{{boat_2_id}}",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"boats",
 						"{{boat_2_id}}"
@@ -1084,12 +1119,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/boats/{{boat_2_id}}",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/boats/{{boat_2_id}}",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"boats",
 						"{{boat_2_id}}"
@@ -1104,11 +1140,22 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "585a258d-f38c-4241-a2f5-8b34816ebf56",
+						"id": "d4e9031d-cf9f-4c49-88c9-5f723c5e5e5f",
 						"type": "text/javascript",
 						"exec": [
-							"pm.test(\"Status code is 400\", function () {",
-							"    pm.response.to.have.status(400);",
+							"pm.test(\"No arrival date\", function() {",
+							"    let name = pm.response.json().arrival_date;",
+							"    pm.expect(name).to.equal(null);",
+							"});",
+							"",
+							"pm.test(\"No boat\", function() {",
+							"    let name = pm.response.json().current_boat;",
+							"    pm.expect(name).to.equal(null);",
+							"});",
+							"",
+							"pm.test(\"ID exists\", function() {",
+							"    let name = pm.response.json().id.length;",
+							"    pm.expect(name).to.be.above(0);",
 							"});"
 						]
 					}
@@ -1127,12 +1174,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips/{{slip_1_id}}",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips/{{slip_1_id}}",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips",
 						"{{slip_1_id}}"
@@ -1147,17 +1195,12 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "9ac00bd7-c5ed-4edc-8ce9-07247fefbbcc",
+						"id": "566929a0-d3a2-4ad1-815e-4b9b97ae470d",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Number matches\", function() {",
 							"    let name = pm.response.json().number;",
-							"    pm.expect(name).to.equal(111);",
-							"});",
-							"",
-							"pm.test(\"No departure data\", function() {",
-							"    let name = pm.response.json().departure_history.length;",
-							"    pm.expect(name).to.equal(0);",
+							"    pm.expect(name).to.equal(66789);",
 							"});",
 							"",
 							"pm.test(\"Arrival date\", function() {",
@@ -1191,12 +1234,13 @@
 					"raw": "{\"boat_id\":\"{{boat_1_id}}\",\"arrival_date\":\"2018-01-20\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips/{{slip_1_id}}/boat",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips/{{slip_1_id}}/boat",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips",
 						"{{slip_1_id}}",
@@ -1233,12 +1277,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/slips/{{slip_1_id}}",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/slips/{{slip_1_id}}",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"slips",
 						"{{slip_1_id}}"
@@ -1276,12 +1321,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/boats/{{slip_1_id}}",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/boats/{{slip_1_id}}",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"boats",
 						"{{slip_1_id}}"
@@ -1320,12 +1366,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/boats/{{boat_1_id}}",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/boats/{{boat_1_id}}",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"boats",
 						"{{boat_1_id}}"
@@ -1353,12 +1400,13 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/deleteall",
-					"protocol": "http",
+					"raw": "https://cs496-dock-implementation.appspot.com/deleteall",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"cs496-dock-implementation",
+						"appspot",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"deleteall"
 					]
