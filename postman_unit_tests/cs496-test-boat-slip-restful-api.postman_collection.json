@@ -1,0 +1,1392 @@
+{
+	"info": {
+		"_postman_id": "bd9e6e44-c8db-43d5-a12b-4fb20c7210b3",
+		"name": "cs496-test-boat-slip-restful-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "clean up all data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "96133c13-561c-4299-9f66-df27122c7067",
+						"type": "text/javascript",
+						"exec": [
+							"pm.environment.clear()"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/deleteall",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteall"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check no boats",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "048800e0-9030-4bcf-999b-0b087162c5b9",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"No boats\", function() {",
+							"    let name = pm.response.json().length;",
+							"    pm.expect(name).to.equal(0);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/boats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"boats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create boat 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "84a7c761-0644-4b3d-ab9b-a7d8cf490716",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"pm.test(\"Name matches\", function() {",
+							"    let name = pm.response.json().name;",
+							"    pm.expect('AAAAA').to.equal(name);",
+							"});",
+							"",
+							"pm.test(\"Type matches\", function() {",
+							"    let name = pm.response.json().type;",
+							"    pm.expect('Fighter').to.equal(name);",
+							"});",
+							"",
+							"pm.test(\"At sea\", function() {",
+							"    let name = pm.response.json().at_sea;",
+							"    pm.expect(name).to.equal(true);",
+							"});",
+							"",
+							"pm.test(\"ID generated\", function() {",
+							"    let name = pm.response.json().id.length;",
+							"    pm.expect(name).to.be.above(0);",
+							"});",
+							"",
+							"//retrieve gist ID for editing in another request",
+							"pm.environment.set('boat_1_id', pm.response.json().id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/boats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"boats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create boat 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d82ec021-8713-4473-a23c-fc98a8fa614e",
+						"type": "text/javascript",
+						"exec": [
+							"pm.environment.set('boat_2_id', pm.response.json().id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"BBBBB\",\"type\":\"Support\",\"length\":10}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/boats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"boats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create boat 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2001662b-79f9-49cf-ac79-01d1957ac260",
+						"type": "text/javascript",
+						"exec": [
+							"pm.environment.set('boat_3_id', pm.response.json().id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"CCCCC\",\"type\":\"Submarine\",\"length\":23}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/boats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"boats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check boats list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "395832a0-b232-4e29-ab86-c2973e5a22d9",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Lists 3 boats\", function() {",
+							"    let name = pm.response.json().length;",
+							"    pm.expect(name).to.equal(3);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/boats/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"boats",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get boat 1 details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "84a7c761-0644-4b3d-ab9b-a7d8cf490716",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"pm.test(\"Name matches\", function() {",
+							"    let name = pm.response.json().name;",
+							"    pm.expect('AAAAA').to.equal(name);",
+							"});",
+							"",
+							"pm.test(\"Type matches\", function() {",
+							"    let name = pm.response.json().type;",
+							"    pm.expect('Fighter').to.equal(name);",
+							"});",
+							"",
+							"pm.test(\"At sea\", function() {",
+							"    let name = pm.response.json().at_sea;",
+							"    pm.expect(name).to.equal(true);",
+							"});",
+							"",
+							"pm.test(\"ID generated\", function() {",
+							"    let name = pm.response.json().id.length;",
+							"    pm.expect(name).to.be.above(0);",
+							"});",
+							"",
+							"//retrieve gist ID for editing in another request",
+							"pm.environment.set('boat_1_id', pm.response.json().id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/boats/{{boat_1_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"boats",
+						"{{boat_1_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check no slips",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "63b0fb3f-699d-40ee-8a6b-d9924f750fd9",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"No slips\", function() {",
+							"    let name = pm.response.json().length;",
+							"    pm.expect(name).to.equal(0);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create slip 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"number\":111}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create slip 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c19760c-585a-4e68-a6bb-fc73c02773e9",
+						"type": "text/javascript",
+						"exec": [
+							"//retrieve gist ID for editing in another request",
+							"pm.environment.set('slip_2_id', pm.response.json().id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"number\":222}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create slip 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e2c09b2e-42fb-4efa-88a4-7764f88e819c",
+						"type": "text/javascript",
+						"exec": [
+							"//retrieve gist ID for editing in another request",
+							"pm.environment.set('slip_3_id', pm.response.json().id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"number\":333}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check slips list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "395832a0-b232-4e29-ab86-c2973e5a22d9",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Lists 3 boats\", function() {",
+							"    let name = pm.response.json().length;",
+							"    pm.expect(name).to.equal(3);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get slip 1 details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5069f429-f26b-4d2d-ba08-b026bb3202fa",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Number matches\", function() {",
+							"    let name = pm.response.json().number;",
+							"    pm.expect(name).to.equal(111);",
+							"});",
+							"",
+							"pm.test(\"No departure data\", function() {",
+							"    let name = pm.response.json().departure_history.length;",
+							"    pm.expect(name).to.equal(0);",
+							"});",
+							"",
+							"pm.test(\"No arrival date\", function() {",
+							"    let name = pm.response.json().arrival_date;",
+							"    pm.expect(name).to.equal(null);",
+							"});",
+							"",
+							"pm.test(\"No boat\", function() {",
+							"    let name = pm.response.json().current_boat;",
+							"    pm.expect(name).to.equal(null);",
+							"});",
+							"",
+							"pm.test(\"ID exists\", function() {",
+							"    let name = pm.response.json().id.length;",
+							"    pm.expect(name).to.be.above(0);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"number\":111}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips/{{slip_1_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips",
+						"{{slip_1_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "attempt to remove boat in slip 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1279fc40-f982-4512-b879-036583f50616",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips/{{slip_1_id}}/boat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips",
+						"{{slip_1_id}}",
+						"boat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put boat 1 to slip 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ac00bd7-c5ed-4edc-8ce9-07247fefbbcc",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Number matches\", function() {",
+							"    let name = pm.response.json().number;",
+							"    pm.expect(name).to.equal(111);",
+							"});",
+							"",
+							"pm.test(\"No departure data\", function() {",
+							"    let name = pm.response.json().departure_history.length;",
+							"    pm.expect(name).to.equal(0);",
+							"});",
+							"",
+							"pm.test(\"Arrival date\", function() {",
+							"    let name = pm.response.json().arrival_date;",
+							"    pm.expect(name).to.equal('2018-01-20');",
+							"});",
+							"",
+							"pm.test(\"No boat\", function() {",
+							"    let name = pm.response.json().current_boat.length;",
+							"    pm.expect(name).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"ID exists\", function() {",
+							"    let name = pm.response.json().id.length;",
+							"    pm.expect(name).to.be.above(0);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"boat_id\":\"{{boat_1_id}}\",\"arrival_date\":\"2018-01-20\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips/{{slip_1_id}}/boat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips",
+						"{{slip_1_id}}",
+						"boat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put boat 2 to slip 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "574e6005-a519-42ac-b998-a0acaa598559",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"boat_id\":\"{{boat_2_id}}\",\"arrival_date\":\"2018-01-21\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips/{{slip_1_id}}/boat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips",
+						"{{slip_1_id}}",
+						"boat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get slip 1's boat details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2721b768-26b7-45cc-83e9-299ecc4c1814",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"pm.test(\"Name matches\", function() {",
+							"    let name = pm.response.json().name;",
+							"    pm.expect('AAAAA').to.equal(name);",
+							"});",
+							"",
+							"pm.test(\"Type matches\", function() {",
+							"    let name = pm.response.json().type;",
+							"    pm.expect('Fighter').to.equal(name);",
+							"});",
+							"",
+							"pm.test(\"At sea\", function() {",
+							"    let name = pm.response.json().at_sea;",
+							"    pm.expect(name).to.equal(false);",
+							"});",
+							"",
+							"pm.test(\"ID generated\", function() {",
+							"    let name = pm.response.json().id.length;",
+							"    pm.expect(name).to.be.above(0);",
+							"});",
+							"",
+							"//retrieve gist ID for editing in another request",
+							"pm.environment.set('boat_1_id', pm.response.json().id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"boat_id\":\"{{boat_1_id}}\",\"arrival_date\":\"2018-01-20\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips/{{slip_1_id}}/boat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips",
+						"{{slip_1_id}}",
+						"boat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get slip 2's boat details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a19af85b-9a3b-4720-96fd-32af8399a812",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"boat_id\":\"{{boat_1_id}}\",\"arrival_date\":\"2018-01-20\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips/{{slip_2_id}}/boat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips",
+						"{{slip_2_id}}",
+						"boat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove boat from slip 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "340b785f-8ebd-42a0-a45e-d4bf44c7cb94",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Number matches\", function() {",
+							"    let name = pm.response.json().number;",
+							"    pm.expect(name).to.equal(111);",
+							"});",
+							"",
+							"pm.test(\"Departure data recorded\", function() {",
+							"    let name = pm.response.json().departure_history.length;",
+							"    pm.expect(name).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Correct boat id for departure data\", function() {",
+							"   let name = pm.response.json().departure_history[0].departure_boat;",
+							"   pm.expect(name).to.be.equal(pm.environment.get('boat_1_id'))",
+							"});",
+							"",
+							"pm.test(\"No arrival date\", function() {",
+							"    let name = pm.response.json().arrival_date;",
+							"    pm.expect(name).to.equal(null);",
+							"});",
+							"",
+							"pm.test(\"No boat\", function() {",
+							"    let name = pm.response.json().current_boat;",
+							"    pm.expect(name).to.equal(null);",
+							"});",
+							"",
+							"pm.test(\"ID exists\", function() {",
+							"    let name = pm.response.json().id.length;",
+							"    pm.expect(name).to.be.above(0);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips/{{slip_1_id}}/boat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips",
+						"{{slip_1_id}}",
+						"boat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update slip 1 number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ac60c73d-67c2-4b92-9aac-a00cbb481b56",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Number matches\", function() {",
+							"    let name = pm.response.json().number;",
+							"    pm.expect(name).to.equal(66789);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"number\":66789}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips/{{slip_1_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips",
+						"{{slip_1_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update boat 1 details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "52c431d7-7c76-4d68-9754-86c9def4182a",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"pm.test(\"Name matches\", function() {",
+							"    let name = pm.response.json().name;",
+							"    pm.expect('Braveheart').to.equal(name);",
+							"});",
+							"",
+							"pm.test(\"Type matches\", function() {",
+							"    let name = pm.response.json().type;",
+							"    pm.expect('Vanguard').to.equal(name);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"ASDF\",\"length\":239}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/boats/{{boat_1_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"boats",
+						"{{boat_1_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete boat 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72efbdc9-7653-4ef1-8c09-5602e439fb8f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/boats/{{boat_2_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"boats",
+						"{{boat_2_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "confirm deletion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "585a258d-f38c-4241-a2f5-8b34816ebf56",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/boats/{{boat_2_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"boats",
+						"{{boat_2_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "confirm slip update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "585a258d-f38c-4241-a2f5-8b34816ebf56",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips/{{slip_1_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips",
+						"{{slip_1_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put boat 1 to slip 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ac00bd7-c5ed-4edc-8ce9-07247fefbbcc",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Number matches\", function() {",
+							"    let name = pm.response.json().number;",
+							"    pm.expect(name).to.equal(111);",
+							"});",
+							"",
+							"pm.test(\"No departure data\", function() {",
+							"    let name = pm.response.json().departure_history.length;",
+							"    pm.expect(name).to.equal(0);",
+							"});",
+							"",
+							"pm.test(\"Arrival date\", function() {",
+							"    let name = pm.response.json().arrival_date;",
+							"    pm.expect(name).to.equal('2018-01-20');",
+							"});",
+							"",
+							"pm.test(\"No boat\", function() {",
+							"    let name = pm.response.json().current_boat.length;",
+							"    pm.expect(name).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"ID exists\", function() {",
+							"    let name = pm.response.json().id.length;",
+							"    pm.expect(name).to.be.above(0);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"boat_id\":\"{{boat_1_id}}\",\"arrival_date\":\"2018-01-20\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips/{{slip_1_id}}/boat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips",
+						"{{slip_1_id}}",
+						"boat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete slip 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72efbdc9-7653-4ef1-8c09-5602e439fb8f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/slips/{{slip_1_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"slips",
+						"{{slip_1_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "confirm deletion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "585a258d-f38c-4241-a2f5-8b34816ebf56",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/boats/{{slip_1_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"boats",
+						"{{slip_1_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "confirm boat update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a3d3e846-bc23-4833-9235-00596c070eb7",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"At sea\", function() {",
+							"    let name = pm.response.json().at_sea;",
+							"    pm.expect(name).to.equal(true);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/boats/{{boat_1_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"boats",
+						"{{boat_1_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clean up all data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "96133c13-561c-4299-9f66-df27122c7067",
+						"type": "text/javascript",
+						"exec": [
+							"pm.environment.clear()"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/deleteall",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteall"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d623d969-7d3f-40cc-9c27-e566b343488b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "20dd36d5-64a4-48d1-9d80-ab98a4980686",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
