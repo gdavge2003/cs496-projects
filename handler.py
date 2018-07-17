@@ -177,7 +177,7 @@ class SlipWithBoatHandler(webapp2.RequestHandler):
 		else:
 			put_boat_data = json.loads(self.request.body)
 
-			if(not IsExist(put_boat_data['id'])):
+			if(not IsExist(put_boat_data['boat_id'])):
 				self.response.set_status(400)
 				self.response.write('Bad Boat ID')
 			else:
