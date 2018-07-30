@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/horizontal_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Horizontal View" />
+
+        <Button
+            android:id="@+id/vertical_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vertical View" />
+
+        <Button
+            android:id="@+id/grid_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grid View" />
+
+        <Button
+            android:id="@+id/relative_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Relative View" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
