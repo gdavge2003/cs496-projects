@@ -3,4 +3,5 @@
     <string name="string_input">String: </string>
     <string name="user_input">Enter something into DB!</string>
     <string name="submit">Submit</string>
+    <string name="delete_table_contents">Wipe Table Contents (Debugging Only)</string>
 </resources>
