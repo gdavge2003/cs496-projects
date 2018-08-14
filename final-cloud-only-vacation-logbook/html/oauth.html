@@ -1,27 +1,34 @@
 <html>
   <head>
-    <title>Vacation Logbook</title>
+    <title>Stock Stats</title>
     <link rel="stylesheet" type="text/css" href="static/main.css">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
   </head>
   <body>
-    <img id="banner" src="static/vacation-banner.jpg">
+    <a href="/">
+      <img id="banner" src="static/vacation-banner.jpg">
+    </a>
 
-    <h2>OAuth 2.0 Implementation <small class="text-muted">via Google Endpoint</small></h2>
-    <p class="lead centered-text">Webapp demonstrating OAuth 2.0. Built on Google App Engine with Python/django.</p>
-    
-
-    <div>
-      <div style="width:50%;word-wrap:break-word;">
-        <p class="triangle-border">
-          Okay, I got it! Hello <b>{{ fname }} {{ lname }}</b>!<br />
-          Your profile is cool: <b><a href="{{ gplink }}">{{ gplink }}</a></b><br />
-          I used the state <b>{{ state }}</b> to find your info!
-        </p>
-      </div>
-    	<a href="{{ url }}">
-    		<img src="static/baby_auth.png" alt="click here to authenticate" style="width: 250px; height: 300px">
-    	</a>
-    </div>
+    <div class="jumbotron">
+      <h1 class="display-3">Your Very Personalized Stocks Logbook</h1>
+      <p class="lead">
+        {{ welcome_message }}
+      </p>
+      <h3>
+        Basic Public Account Details
+      </h3>
+      <p>
+        Display Name: {{ name }} <br>
+        User ID: {{ user_id }} <br>
+        Email: {{ email }} <br>
+        Occupation: {{ occupation }}
+      </p>
+      <h3>
+        Access Token
+      </h3>
+      <p>
+        Token: {{ access_token }}
+      </p>
+      <hr class="my-4">
   </body>
 </html>

@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Vacation Logbook</title>
+    <title>Stock Stats</title>
     <link rel="stylesheet" type="text/css" href="static/main.css">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
   </head>
@@ -8,22 +8,16 @@
     <img id="banner" src="static/vacation-banner.jpg">
 
     <div class="jumbotron">
-      <h1 class="display-3">Your Very Personalized Vacation Logbook</h1>
+      <h1 class="display-3">Your Very Personalized Stocks Logbook</h1>
       <p class="lead">
-        Whether it's going to be Summer or Winter, it's time to start planning
-        your vacation! Our vacation logbook is here to help you with that. Powered
-         by Google Places, you'll be able to search up places to go and things to
-         do in no time, and save lists of such places so that you don't forget them!
+        This serves RESTful APIs to keep track of your stock quotes. To use,
+        simply sign-in below to get your unique token, which you'll need to use
+        in order to make API calls with your account.
       </p>
       <p>
         Note: this is primararily a server backend that serves the APIs for your account.
-         Authenticating below creates a unique account in our database, and
-         redirects you to a simple frontend that shows a list of places you've added
-         associated with your account.
-      </p>
-      <p>
-        You can use our APIs in order to add Places to User Accounts. A frontend
-        application is not being served by this backend at this time.
+         Authenticating below creates a unique account in our database, provides
+         you with a necessary token that ensures your calls are made to your account.
       </p>
       <hr class="my-4">
       <a href="{{ url }}">

@@ -9,6 +9,9 @@ import os
 import string
 import random
 import urllib
+import logging
+from entity import StockAsset, Account
+from handler import AccountHandler, DeleteAll
 
 # for prod:
 # CLIENT_ID = "1011393638628-nqqof6v98h9pu2rnlpimdcnhit63lcih.apps.googleusercontent.com"
@@ -62,7 +65,7 @@ class OAuthHandler(webapp2.RequestHandler):
 			+ "&response_type=code"
 			+ "&prompt=consent"
 			+ "&include_granted_scopes=true")
-			path = os.path.join(os.path.dirname(__file__), 'html/reject.html')
+			path = os.path.join(os.path.dirname(__file__), 'html/main_page.html')
 			self.response.out.write(template.render(path, {'url': url}))
 
 		else:
@@ -99,15 +102,42 @@ class OAuthHandler(webapp2.RequestHandler):
 
 			# Process retrieved data
 			results = json.loads(results.content)
-			first_name = results['name']['givenName']
-			last_name = results['name']['familyName']
+			name = results['displayName']
 			user_id = results['id']
+			email = results['emails'][0]['value']
+			occupation = ''
+			if hasattr(results, 'occupation'):
+				occupation = results['occupation']
+			else:
+				occupation = "N/A"
 
+			# Check if user already in DB, if not, create an instance
+			is_user_new = True
+			for user in Account.query():
+				if user.user_id == user_id:
+					is_user_new = False
+
+			welcome_message = "Welcome Back! Please ensure you are using the latest token."
+			if is_user_new == True:
+				welcome_message = "Welcome! Please use the token below to use our APIs."
+
+				# Create new instance for user - their "account"
+				new_user_account = Account(occupation=occupation,
+					name=name,
+					email=email,
+					asset_count=0,
+					user_id=user_id,
+					id=user_id)
+				new_user_account.put()
+
+			# Load values to display on front-end
 			template_values = {
-				'fname': first_name,
-				'lname': last_name,
-				'gplink': gplus_link,
-				'state': state,
+				'name': name,
+				'user_id': user_id,
+				'email': email,
+				'occupation': occupation,
+				'access_token': access_token,
+				'welcome_message': welcome_message,
 				'url': "/"
 			}
 			path = os.path.join(os.path.dirname(__file__), 'html/oauth.html')
@@ -121,6 +151,8 @@ webapp2.WSGIApplication.allowed_methods = new_allowed_methods
 
 app = webapp2.WSGIApplication([
 	('/', MainPage),
-	('/oauth', OAuthHandler)
+	('/oauth', OAuthHandler),
+	('/user/(.*)', AccountHandler),
+	('/deleteall', DeleteAll)
 ], debug=True)
 # [END app]

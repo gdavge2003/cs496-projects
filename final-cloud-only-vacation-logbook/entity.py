@@ -5,22 +5,17 @@ import webapp2
 import json
 
 # entity classes
-class DepartureHistory(ndb.Model):
-    departure_date = ndb.StringProperty()
-    departure_boat = ndb.StringProperty()
-
-
-class Boat(ndb.Model):
+class StockAsset(ndb.Model):
     id = ndb.StringProperty()
-    name = ndb.StringProperty(required=True)
-    type = ndb.StringProperty(default=None)
-    length = ndb.IntegerProperty(default=None)
-    at_sea = ndb.BooleanProperty()
+    user_id = ndb.StringProperty() # connection of who it belongs to
+    symbol = ndb.StringProperty()
+    owned_count = ndb.FloatProperty()
+    price_usd = ndb.FloatProperty()
 
 
-class Slip(ndb.Model):
-    id = ndb.StringProperty()
-    number = ndb.IntegerProperty(required=True)
-    current_boat = ndb.StringProperty()
-    arrival_date = ndb.StringProperty()
-    departure_history = ndb.StructuredProperty(DepartureHistory, repeated=True)
+class Account(ndb.Model):
+    user_id = ndb.StringProperty() # this should be used as unique key
+    name = ndb.StringProperty()
+    email = ndb.StringProperty()
+    occupation = ndb.StringProperty()
+    asset_count = ndb.IntegerProperty()
