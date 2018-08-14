@@ -6,11 +6,12 @@ import json
 
 # entity classes
 class StockAsset(ndb.Model):
-    id = ndb.StringProperty()
     user_id = ndb.StringProperty() # connection of who it belongs to
+    giver_id = ndb.StringProperty(default=None) # if asset is gift from someone
     symbol = ndb.StringProperty()
     owned_count = ndb.FloatProperty()
-    price_usd = ndb.FloatProperty()
+    price_usd_open = ndb.StringProperty()
+    last_updated = ndb.StringProperty()
 
 
 class Account(ndb.Model):

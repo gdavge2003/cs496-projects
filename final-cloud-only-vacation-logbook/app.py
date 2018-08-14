@@ -11,7 +11,7 @@ import random
 import urllib
 import logging
 from entity import StockAsset, Account
-from handler import AccountHandler, DeleteAll
+from handler import AccountHandler, StockAssetHandler, DeleteAll
 
 # for prod:
 # CLIENT_ID = "1011393638628-nqqof6v98h9pu2rnlpimdcnhit63lcih.apps.googleusercontent.com"
@@ -103,7 +103,7 @@ class OAuthHandler(webapp2.RequestHandler):
 			# Process retrieved data
 			results = json.loads(results.content)
 			name = results['displayName']
-			user_id = results['id']
+			user_id = str(results['id'])
 			email = results['emails'][0]['value']
 			occupation = ''
 			if hasattr(results, 'occupation'):
@@ -113,9 +113,11 @@ class OAuthHandler(webapp2.RequestHandler):
 
 			# Check if user already in DB, if not, create an instance
 			is_user_new = True
+			user_account = None
 			for user in Account.query():
 				if user.user_id == user_id:
 					is_user_new = False
+					user_account = user
 
 			welcome_message = "Welcome Back! Please ensure you are using the latest token."
 			if is_user_new == True:
@@ -129,13 +131,14 @@ class OAuthHandler(webapp2.RequestHandler):
 					user_id=user_id,
 					id=user_id)
 				new_user_account.put()
+				user_account = new_user_account
 
 			# Load values to display on front-end
 			template_values = {
-				'name': name,
-				'user_id': user_id,
-				'email': email,
-				'occupation': occupation,
+				'name': user_account.name,
+				'user_id': user_account.user_id,
+				'email': user_account.email,
+				'occupation': user_account.occupation,
 				'access_token': access_token,
 				'welcome_message': welcome_message,
 				'url': "/"
@@ -153,6 +156,7 @@ app = webapp2.WSGIApplication([
 	('/', MainPage),
 	('/oauth', OAuthHandler),
 	('/user/(.*)', AccountHandler),
-	('/deleteall', DeleteAll)
+	('/stock/(.*)', StockAssetHandler),
+	('/deleteall', DeleteAll) # DEBUGGING ONLY!
 ], debug=True)
 # [END app]
