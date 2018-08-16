@@ -29,6 +29,16 @@ def UserExists(user_id):
 	return is_found
 
 
+# checks whether user has stock asset
+def UserHasStockAsset(user_id, symbol):
+	stock = None
+	for stockasset in StockAsset.query():
+		if stockasset.user_id == user_id and stockasset.symbol == symbol:
+			stock = stockasset
+
+	return stock
+
+
 # grabs the bearer token from user's auth header
 def GetBearerToken(headers):
 	logging.info(headers)
@@ -130,14 +140,18 @@ class AccountHandler(webapp2.RequestHandler):
 
 				for key in update_data:
 					# if key exists in account data, update it
-					if key != 'asset_count' and key != 'user_id':
-						if hasattr(data, key):
-							setattr(data, key, update_data[key])
+					if key == 'name':
+						data.name = update_data[key]
+					elif key == 'occupation':
+						data.occupation = update_data[key]
+					elif key == 'email':
+						data.email = update_data[key]
+
 				data.put()
 
 				# send out updated information
-				data = Account.get_by_id(user_id)
 				self.response.write(data.to_dict())
+
 
 	# deletes user account - removes all associated stock assets as well
 	def delete(self, user_id=None):
@@ -157,8 +171,10 @@ class AccountHandler(webapp2.RequestHandler):
 				data = Account.get_by_id(user_id)
 				data.key.delete()
 
-				#TODO: delete stock assets related to user account
-
+				# delete account's associated assets
+				for stockasset in StockAsset.query():
+					if stockasset.user_id == user_id:
+						stockasset.key.delete()
 
 class StockAssetHandler(webapp2.RequestHandler):
 	# gets basic information for stock
@@ -183,25 +199,35 @@ class StockAssetHandler(webapp2.RequestHandler):
 
 				self.response.write(json.dumps(data))
 
-	# create a new stock asset instance for user
+	# create a new stock asset for user
 	def post(self, stock_symbol=None):
 		# get data
+		stock_data = GetStockInfo(stock_symbol)
 		token = GetBearerToken(self.request.headers)
 		user_id = GetUserId(token)
-		stock_data = GetStockInfo(stock_symbol)
 		user_req = json.loads(self.request.body)
 
 		# check valid user
 		if user_id == None:
 			self.response.status = 401
 			self.response.write("Error: Invalid token, unable to authenticate.")
+		# no stock symbol mentioned in request
+		elif not stock_symbol:
+			self.response.status = 400
+			self.response.write("Error: Stock symbol must be specified in request.")
 		# check valid stock
 		elif 'Error Message' in stock_data:
 			self.response.status = 404
 			self.response.write("Error: Stock doesn't exist. Check Symbol.")
+		# check correct body attribute
 		elif 'owned_count' not in user_req:
 			self.response.status = 400
 			self.response.write("Error: POST body is missing 'owned_count' value.")
+		# check if user already has this asset
+		elif UserHasStockAsset(user_id, stock_symbol) is not None:
+			self.response.status = 400
+			self.response.write("Error: You already own this stock." +
+				"Please use PATCH instead to modify amount or PUT to add amount.")
 		else:
 			last_updated = stock_data['Meta Data']['3. Last Refreshed']
 			stock = StockAsset(
@@ -215,248 +241,144 @@ class StockAssetHandler(webapp2.RequestHandler):
 			stock.id = stock.key.urlsafe()
 			stock.put()
 
+			account = Account.get_by_id(user_id)
+			account.asset_count = account.asset_count + 1
+			account.put()
+
 			self.response.write(json.dumps(stock.to_dict()))
 
+	# modify user's current stock assset
+	def patch(self, stock_symbol=None):
+		# get data
+		stock_data = {}#GetStockInfo(stock_symbol)
+		token = GetBearerToken(self.request.headers)
+		user_id = GetUserId(token)
+		user_req = json.loads(self.request.body)
+		user_stock_data = UserHasStockAsset(user_id, stock_symbol)
 
-#
-# # entity handlers
-# class BoatHandler(webapp2.RequestHandler):
-# 	# add a new boat
-# 	def post(self):
-# 		# user submits request with data for boat name, type, length
-# 		data = json.loads(self.request.body)
-# 		new_boat = Boat(name=data['name'], type=data['type'], length=data['length'], at_sea=True)
-#
-# 		new_boat.put() # add in db first so id is auto-generated
-# 		new_boat.id = new_boat.key.urlsafe()
-# 		new_boat.put()
-#
-# 		boat_dict = new_boat.to_dict()
-#
-# 		self.response.write(json.dumps(boat_dict))
-#
-#
-# 	# get data for specific instance or list if id is not specified
-# 	def get(self, id=None):
-# 		if(id):
-# 			if(IsExist(id)):
-# 				data = ndb.Key(urlsafe=id).get()
-# 				boat_dict = data.to_dict()
-# 				self.response.write(json.dumps(boat_dict))
-# 			else:
-# 				self.response.set_status(400)
-# 				self.response.write('Bad ID')
-# 		else:
-# 			self.response.write(json.dumps([d.to_dict() for d in Boat.query()]))
-#
-#
-# 	# modify/edit boat (name, type, and/or length)
-# 	# patch should not be used to modify at_sea
-# 	def patch(self, id=None):
-# 		if(not id):
-# 			self.response.set_status(400)
-# 			self.response.write('Require Boat ID')
-#
-# 		if(not IsExist(id)):
-# 			self.response.set_status(400)
-# 			self.response.write('Bad ID')
-# 		else:
-# 			update_data = json.loads(self.request.body)
-# 			data = ndb.Key(urlsafe=id).get()
-#
-# 			if(update_data.get('name')):
-# 				data.name = update_data['name']
-# 			if(update_data.get('type')):
-# 				data.type = update_data['type']
-# 			if(update_data.get('length')):
-# 				data.length = update_data['length']
-#
-# 			data.put()
-#
-# 			self.response.write(json.dumps(data.to_dict()))
-#
-#
-# 	# delete boat
-# 	def delete(self, id=None):
-# 		if(not id):
-# 			self.response.set_status(400)
-# 			self.response.write('Require Boat ID')
-#
-# 		if(not IsExist(id)):
-# 			self.response.set_status(400)
-# 			self.response.write('Bad ID')
-# 		else:
-# 			data = ndb.Key(urlsafe=id).get()
-#
-# 			# if in slip, update slip data
-# 			if(not data.at_sea):
-# 				slip = Slip.query(Slip.current_boat == id).get()
-# 				slip.current_boat = None
-# 				slip.arrival_date = None
-# 				slip.put()
-#
-# 			data.key.delete()
-#
-#
-# class SlipHandler(webapp2.RequestHandler):
-# 	# add a new slip
-# 	def post(self):
-# 		# user submits request with data for slip number
-# 		data = json.loads(self.request.body)
-# 		new_slip = Slip(number=data['number'], current_boat=None, arrival_date=None, departure_history=[])
-#
-# 		new_slip.put()
-# 		new_slip.id = new_slip.key.urlsafe()
-# 		new_slip.put()
-#
-# 		slip_dict = new_slip.to_dict()
-#
-# 		self.response.write(json.dumps(slip_dict))
-#
-#
-# 	# get data for specific instance or list if id is not specified
-# 	def get(self, id=None):
-# 		if(id):
-# 			if(not IsExist(id)):
-# 				self.response.set_status(400)
-# 				self.response.write('Bad ID')
-# 			else:
-# 				data = ndb.Key(urlsafe=id).get()
-# 				self.response.write(json.dumps(data.to_dict()))
-# 		else:
-# 			self.response.write(json.dumps([d.to_dict() for d in Slip.query()]))
-#
-# 	# modify/edit slip
-# 	# patch should not be used to modify boat or dates as those are relational information
-# 	def patch(self, id=None):
-# 		if(not id):
-# 			self.response.set_status(400)
-# 			self.response.write('Require Slip ID')
-#
-# 		if(not IsExist(id)):
-# 			self.response.set_status(400)
-# 			self.response.write('Bad ID')
-# 		else:
-# 			update_data = json.loads(self.request.body)
-# 			data = ndb.Key(urlsafe=id).get()
-#
-# 			data.number = update_data['number']
-# 			data.put()
-#
-# 			self.response.write(json.dumps(data.to_dict()))
-#
-#
-# 	# delete slip
-# 	def delete(self, id=None):
-# 		if(not id):
-# 			self.response.set_status(400)
-# 			self.response.write('Require Slip ID')
-#
-# 		if(not IsExist(id)):
-# 			self.response.set_status(400)
-# 			self.response.write('Bad ID')
-# 		else:
-# 			data = ndb.Key(urlsafe=id).get()
-#
-# 			# if there's a boat update boat
-# 			if(data.current_boat):
-# 				boat = Boat.query(Boat.id == data.current_boat).get()
-# 				boat.at_sea = True
-# 				boat.put()
-#
-# 			data.key.delete()
-#
-#
-#
-# class SlipWithBoatHandler(webapp2.RequestHandler):
-# 	# put a boat into a slip (body)
-# 	def put(self, id=None):
-# 		if(not id):
-# 			self.response.set_status(400)
-# 			self.response.write('Require Slip ID')
-#
-# 		if(not IsExist(id)):
-# 			self.response.set_status(400)
-# 			self.response.write('Bad Slip ID')
-# 		else:
-# 			put_boat_data = json.loads(self.request.body)
-#
-# 			if(not IsExist(put_boat_data['boat_id'])):
-# 				self.response.set_status(400)
-# 				self.response.write('Bad Boat ID')
-# 			else:
-# 				slip_data = ndb.Key(urlsafe=id).get()
-#
-# 				# returns 403 forbidden if slip is already occupied
-# 				if(slip_data.current_boat):
-# 					self.response.set_status(403)
-# 					self.response.write('Error: Slip is occupied')
-# 				else:
-# 					boat_data = ndb.Key(urlsafe=put_boat_data['boat_id']).get()
-#
-# 					# update boat status in db
-# 					boat_data.at_sea = False
-# 					boat_data.put()
-#
-# 					# update slip data (boat id, arrival date)
-# 					slip_data.current_boat = put_boat_data['boat_id']
-# 					slip_data.arrival_date = put_boat_data['arrival_date']
-# 					slip_data.put()
-# 					self.response.write(json.dumps(slip_data.to_dict()))
-#
-#
-# 	# get information on boat slip is holding, if any
-# 	def get(self, id=None):
-# 		if(not id):
-# 			self.response.set_status(400)
-# 			self.response.write('Require Slip ID')
-#
-# 		if(not IsExist(id)):
-# 			self.response.set_status(400)
-# 			self.response.write('Bad ID')
-# 		else:
-# 			slip_data = ndb.Key(urlsafe=id).get()
-#
-# 			if(not slip_data.current_boat):
-# 				self.response.set_status(204)
-# 			else:
-# 				boat_data = ndb.Key(urlsafe=slip_data.current_boat).get()
-# 				self.response.write(json.dumps(boat_data.to_dict()))
-#
-#
-# 	# remove boat from slip
-# 	def delete(self, id=None):
-# 		if(not id):
-# 			self.response.set_status(400)
-# 			self.response.write('Require Slip ID')
-#
-# 		if(not IsExist(id)):
-# 			self.response.set_status(400)
-# 			self.response.write('Bad ID')
-# 		else:
-# 			slip_data = ndb.Key(urlsafe=id).get()
-#
-# 			if(not slip_data.current_boat):
-# 				self.response.set_status(204)
-# 			else:
-# 				boat_data = ndb.Key(urlsafe=slip_data.current_boat).get()
-#
-# 				# record boat departure
-# 				departure_data = DepartureHistory(
-# 					departure_boat=slip_data.current_boat,
-# 					departure_date=str(date.today()))
-# 				slip_data.departure_history.append(departure_data)
-#
-# 				# update rest of slip
-# 				slip_data.current_boat = None
-# 				slip_data.arrival_date = None
-# 				slip_data.put()
-#
-# 				# update boat data
-# 				boat_data.at_sea = True
-# 				boat_data.put()
-#
-# 				self.response.write(json.dumps(slip_data.to_dict()))
+		# check valid user
+		if user_id == None:
+			self.response.status = 401
+			self.response.write("Error: Invalid token, unable to authenticate.")
+		# no stock symbol mentioned in request
+		elif not stock_symbol:
+			self.response.status = 400
+			self.response.write("Error: Stock symbol must be specified in request.")
+		# check valid stock
+		elif 'Error Message' in stock_data:
+			self.response.status = 404
+			self.response.write("Error: Stock doesn't exist. Check Symbol.")
+		# check correct body attribute
+		elif 'owned_count' not in user_req:
+			self.response.status = 400
+			self.response.write("Error: PATCH body is missing 'owned_count' value.")
+		# check if user already has this asset
+		elif user_stock_data is None:
+			self.response.status = 400
+			self.response.write("Error: User does not own this stock and hence" +
+				" it cannot be modified. Please use POST if adding new asset.")
+		else:
+			# update amount, and update other stats from stock server
+			last_updated = stock_data['Meta Data']['3. Last Refreshed']
+			user_stock_data.owned_count = user_req['owned_count']
+			user_stock_data.last_updated = last_updated
+			user_stock_data.price_usd_open = stock_data['Time Series (Daily)'][last_updated]['1. open']
+
+			user_stock_data.put()
+
+			self.response.write(json.dumps(user_stock_data.to_dict()))
+
+	# add stock amount to existing amount
+	def put(self, stock_symbol=None):
+		# get data
+		stock_data = GetStockInfo(stock_symbol)
+		token = GetBearerToken(self.request.headers)
+		user_id = GetUserId(token)
+		user_req = json.loads(self.request.body)
+		user_stock_data = UserHasStockAsset(user_id, stock_symbol)
+
+		# check valid user
+		if user_id == None:
+			self.response.status = 401
+			self.response.write("Error: Invalid token, unable to authenticate.")
+		# no stock symbol mentioned in request
+		elif not stock_symbol:
+			self.response.status = 400
+			self.response.write("Error: Stock symbol must be specified in request.")
+		# check valid stock
+		elif 'Error Message' in stock_data:
+			self.response.status = 404
+			self.response.write("Error: Stock doesn't exist. Check Symbol.")
+		# check correct body attribute
+		elif 'owned_count' not in user_req:
+			self.response.status = 400
+			self.response.write("Error: PUT body is missing 'owned_count' value.")
+		# check if user already has this asset
+		elif user_stock_data is None:
+			self.response.status = 400
+			self.response.write("Error: User does not own this stock and hence" +
+				" it cannot be added to. Please use POST if adding new asset.")
+		else:
+			# update amount, and update other stats from stock server
+			last_updated = stock_data['Meta Data']['3. Last Refreshed']
+			user_stock_data.owned_count = user_stock_data.owned_count + user_req['owned_count']
+			user_stock_data.last_updated = last_updated
+			user_stock_data.price_usd_open = stock_data['Time Series (Daily)'][last_updated]['1. open']
+
+			user_stock_data.put()
+
+			self.response.write(json.dumps(user_stock_data.to_dict()))
+
+	# deletes stock instance from user account
+	def delete(self, stock_symbol=None):
+		# get data
+		token = GetBearerToken(self.request.headers)
+		user_id = GetUserId(token)
+		user_stock_data = UserHasStockAsset(user_id, stock_symbol)
+
+		# check valid user
+		if user_id == None:
+			self.response.status = 401
+			self.response.write("Error: Invalid token, unable to authenticate.")
+		# no stock symbol mentioned in request
+		elif not stock_symbol:
+			self.response.status = 400
+			self.response.write("Error: Stock symbol must be specified in request.")
+		# check if user already has this asset
+		elif user_stock_data is None:
+			self.response.status = 400
+			self.response.write("Error: User does not own this stock and hence" +
+				" it cannot be deleted.")
+		else:
+			# delete instance, and decrement user asset by 1
+			user_stock_data.key.delete()
+
+			account = Account.get_by_id(user_id)
+			account.asset_count = account.asset_count - 1
+			account.put()
+
+			self.response.write(json.dumps(account.to_dict()))
+
+
+class ShowStockAssetHandler(webapp2.RequestHandler):
+	# gets list of stock assets user owns
+	def get(self):
+		# get data
+		token = GetBearerToken(self.request.headers)
+		user_id = GetUserId(token)
+
+		# check valid user
+		if user_id == None:
+			self.response.status = 401
+			self.response.write("Error: Invalid token, unable to authenticate.")
+		else:
+			stocks_owned = {}
+
+			for stockasset in StockAsset.query():
+				if stockasset.user_id == user_id:
+					stocks_owned[stockasset.symbol] = stockasset.to_dict()
+
+			self.response.write(json.dumps(stocks_owned))
 
 
 # debugging purposes only

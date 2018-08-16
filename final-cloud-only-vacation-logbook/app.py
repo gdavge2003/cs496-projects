@@ -11,7 +11,7 @@ import random
 import urllib
 import logging
 from entity import StockAsset, Account
-from handler import AccountHandler, StockAssetHandler, DeleteAll
+from handler import AccountHandler, StockAssetHandler, ShowStockAssetHandler, DeleteAll
 
 # for prod:
 # CLIENT_ID = "1011393638628-nqqof6v98h9pu2rnlpimdcnhit63lcih.apps.googleusercontent.com"
@@ -102,11 +102,12 @@ class OAuthHandler(webapp2.RequestHandler):
 
 			# Process retrieved data
 			results = json.loads(results.content)
+
 			name = results['displayName']
 			user_id = str(results['id'])
 			email = results['emails'][0]['value']
 			occupation = ''
-			if hasattr(results, 'occupation'):
+			if 'occupation' in results:
 				occupation = results['occupation']
 			else:
 				occupation = "N/A"
@@ -157,6 +158,7 @@ app = webapp2.WSGIApplication([
 	('/oauth', OAuthHandler),
 	('/user/(.*)', AccountHandler),
 	('/stock/(.*)', StockAssetHandler),
+	('/stocks/me', ShowStockAssetHandler),
 	('/deleteall', DeleteAll) # DEBUGGING ONLY!
 ], debug=True)
 # [END app]
