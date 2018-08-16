@@ -1,0 +1,1870 @@
+{
+	"info": {
+		"_postman_id": "4dbaaa39-b9e4-48d0-9cf9-edae73264a1c",
+		"name": "cs496-backend-final-project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "verify 1st account existence",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a33e814a-7c43-469c-b895-e1e5e60c8a78",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"pm.test(\"Response has name attribute\", function() {",
+							"    let attr = pm.response.json().name;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Response has occuption attribute\", function() {",
+							"    let attr = pm.response.json().occupation;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Response has email attribute\", function() {",
+							"    let attr = pm.response.json().email;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Asset is at 0\", function() {",
+							"    let attr = pm.response.json().asset_count;",
+							"    pm.expect(attr).to.equal(0);",
+							"});",
+							"",
+							"pm.test(\"User ID matches\", function() {",
+							"    let attr = pm.response.json().user_id;",
+							"    pm.expect(attr).to.equal(environment['user_id1']);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "132f932b-1ec8-4c9a-ac15-954c89758131",
+						"type": "text/javascript",
+						"exec": [
+							"// NOTE! Before beginning Postman tests, must go to the server and sign in to authenticate, which will create an account in the database server as well as provide the token to be used as a bearer token for all API calls.",
+							"",
+							"// Create 2 accounts using different emails, and record their IDs below so they can be used for testing.",
+							"",
+							"// Set collection authentication to use bearer token, which is obtained and given upon login on the server. This need to be updated at the beginning of each collection test run since the token changes",
+							"",
+							"pm.environment.clear()",
+							"",
+							"// Set user ids",
+							"var user_id1 = '114026605854446138844';",
+							"var user_id2 = '104761727237412172656';",
+							"",
+							"// Set environment",
+							"var env = 'local';",
+							"var local_url = 'http://localhost:8080';",
+							"var prod_url = '';",
+							"",
+							"",
+							"// Automated setup for rest of testing",
+							"if (env === 'local') {",
+							"    pm.environment.set('env', local_url);",
+							"}",
+							"else {",
+							"    pm.environment.set('env', prod_url);",
+							"}",
+							"",
+							"pm.environment.set('user_id1', user_id1);",
+							"pm.environment.set('user_id2', user_id2);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/user/{{user_id1}}",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify 2nd account exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bf74f121-9734-43bc-85cd-eb1d04938d3e",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"pm.test(\"Response has name attribute\", function() {",
+							"    let attr = pm.response.json().name;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Response has occuption attribute\", function() {",
+							"    let attr = pm.response.json().occupation;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Response has email attribute\", function() {",
+							"    let attr = pm.response.json().email;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Asset is at 0\", function() {",
+							"    let attr = pm.response.json().asset_count;",
+							"    pm.expect(attr).to.equal(0);",
+							"});",
+							"",
+							"pm.test(\"User ID matches\", function() {",
+							"    let attr = pm.response.json().user_id;",
+							"    pm.expect(attr).to.equal(environment['user_id2']);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/user/{{user_id2}}",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"{{user_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify 400 w/ no user id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0b67127-0fb5-4fec-a5d2-fed512a66b18",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/user/",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify 404 with nonexistant user id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b5484ef5-d62e-4484-a04d-e8f866ae6d7b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/user/111",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st account modifies self",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f73aa05f-653b-463e-adb0-36040acb7b39",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"William Wu\",\"email\":\"wuthewill@gmail.com\",\"occupation\":\"Peacemaker\",\"asset_count\":10,\"user_id\":\"232\"}"
+				},
+				"url": {
+					"raw": "{{env}}/user/{{user_id1}}",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify 1st account update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be082551-908c-49dd-a6e9-852d82da4983",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Correct name update\", function() {",
+							"    let attr = pm.response.json().name;",
+							"    pm.expect(attr).to.equal(\"William Wu\");",
+							"});",
+							"",
+							"pm.test(\"Correct occupation update\", function() {",
+							"    let attr = pm.response.json().occupation;",
+							"    pm.expect(attr).to.equal(\"Peacemaker\");",
+							"});",
+							"",
+							"pm.test(\"Correct email update\", function() {",
+							"    let attr = pm.response.json().email;",
+							"    pm.expect(attr).to.equal(\"wuthewill@gmail.com\");",
+							"});",
+							"",
+							"pm.test(\"Asset count does not update\", function() {",
+							"    let attr = pm.response.json().asset_count;",
+							"    pm.expect(attr).to.equal(0);",
+							"});",
+							"",
+							"pm.test(\"User ID does not update\", function() {",
+							"    let attr = pm.response.json().user_id;",
+							"    pm.expect(attr).to.equal(environment['user_id1']);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/user/{{user_id1}}",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc modifies 2nd acc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "30429769-f8f9-49db-b29a-e49376890027",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Jonson\",\"email\":\"asdf@gmail.com\",\"occupation\":\"Ver\",\"asset_count\":10,\"user_id\":\"232\"}"
+				},
+				"url": {
+					"raw": "{{env}}/user/{{user_id2}}",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"{{user_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify 2nd acc didn't change",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "41c961a6-9fe6-4c6a-9019-cfaa0207462d",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Name did not change\", function() {",
+							"    let attr = pm.response.json().name;",
+							"    pm.expect(attr).to.not.equal(\"Jonson\");",
+							"});",
+							"",
+							"pm.test(\"Occupation did not change\", function() {",
+							"    let attr = pm.response.json().occupation;",
+							"    pm.expect(attr).to.not.equal(\"Ver\");",
+							"});",
+							"",
+							"pm.test(\"Email did not change\", function() {",
+							"    let attr = pm.response.json().email;",
+							"    pm.expect(attr).to.not.equal(\"asdf@gmail.com\");",
+							"});",
+							"",
+							"pm.test(\"Asset count does not update\", function() {",
+							"    let attr = pm.response.json().asset_count;",
+							"    pm.expect(attr).to.equal(0);",
+							"});",
+							"",
+							"pm.test(\"User ID does not update\", function() {",
+							"    let attr = pm.response.json().user_id;",
+							"    pm.expect(attr).to.equal(environment['user_id2']);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/user/{{user_id2}}",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"{{user_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc modifies nonexistent id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "052b9e75-d922-4a54-b778-d76ab3507cc9",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Jonson\",\"email\":\"asdf@gmail.com\",\"occupation\":\"Ver\",\"asset_count\":10,\"user_id\":\"232\"}"
+				},
+				"url": {
+					"raw": "{{env}}/user/123",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc modifies no id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fb428f28-17cb-4a1a-92e4-ab958657b6cd",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Jonson\",\"email\":\"asdf@gmail.com\",\"occupation\":\"Ver\",\"asset_count\":10,\"user_id\":\"232\"}"
+				},
+				"url": {
+					"raw": "{{env}}/user/",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get valid stock info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bcdc3205-183d-4154-adab-28f048c529e2",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Correct stock name\", function() {",
+							"    let attr = pm.response.json().symbol;",
+							"    pm.expect(attr).to.equal(\"wday\");",
+							"});",
+							"",
+							"pm.test(\"Has price\", function() {",
+							"    let attr = pm.response.json().price_usd_open;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"has updated date\", function() {",
+							"    let attr = pm.response.json().last_updated;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get invalid stock info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "734a00a2-47cc-4f52-be4a-781462d24639",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/vasfawerawetagwegta",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"vasfawerawetagwegta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify 400 no stock specified",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0390322e-f918-4b59-8775-c639314cd716",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds stock with bad body",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0390322e-f918-4b59-8775-c639314cd716",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"bleh\":23}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds stock w/ bad auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4a33c3da-88f8-4c53-afc9-cbbbf1dc48ab",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "yikes",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":23}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds stock",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d051fb02-a4d9-4f4b-9332-95076922bffa",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Correct stock name\", function() {",
+							"    let attr = pm.response.json().symbol;",
+							"    pm.expect(attr).to.equal(\"wday\");",
+							"});",
+							"",
+							"pm.test(\"Correct amount\", function() {",
+							"    let attr = pm.response.json().owned_count;",
+							"    pm.expect(attr).to.equal(100);",
+							"});",
+							"",
+							"pm.test(\"Correct ownership\", function() {",
+							"    let attr = pm.response.json().user_id;",
+							"    pm.expect(attr).to.equal(environment['user_id1']);",
+							"});",
+							"",
+							"pm.test(\"Has price\", function() {",
+							"    let attr = pm.response.json().price_usd_open;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"has updated date\", function() {",
+							"    let attr = pm.response.json().last_updated;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":100}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds same stock",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1c223a2-f2b6-4439-89dd-d63bac4f044b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":100}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify 1st acc stock asset count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "98a18a85-f72e-416f-a896-49b9fab3e029",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Asset is at 0\", function() {",
+							"    let attr = pm.response.json().asset_count;",
+							"    pm.expect(attr).to.equal(1);",
+							"});",
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "69b5790f-dc4b-4294-8b40-893bf27441d1",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/user/{{user_id1}}",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc modifies non-existent asset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1c223a2-f2b6-4439-89dd-d63bac4f044b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":50}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/erf",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"erf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc modifies asset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1d0469fc-c0fd-4daa-9c04-94586774f850",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Correct stock name\", function() {",
+							"    let attr = pm.response.json().symbol;",
+							"    pm.expect(attr).to.equal(\"wday\");",
+							"});",
+							"",
+							"pm.test(\"Correct updated amount\", function() {",
+							"    let attr = pm.response.json().owned_count;",
+							"    pm.expect(attr).to.equal(5);",
+							"});",
+							"",
+							"pm.test(\"Correct ownership\", function() {",
+							"    let attr = pm.response.json().user_id;",
+							"    pm.expect(attr).to.equal(environment['user_id1']);",
+							"});",
+							"",
+							"pm.test(\"Has price\", function() {",
+							"    let attr = pm.response.json().price_usd_open;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"has updated date\", function() {",
+							"    let attr = pm.response.json().last_updated;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds 5 to asset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f83780d9-7044-4a88-ac09-1d9f25676b60",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Correct stock name\", function() {",
+							"    let attr = pm.response.json().symbol;",
+							"    pm.expect(attr).to.equal(\"wday\");",
+							"});",
+							"",
+							"pm.test(\"Correct updated amount\", function() {",
+							"    let attr = pm.response.json().owned_count;",
+							"    pm.expect(attr).to.equal(10);",
+							"});",
+							"",
+							"pm.test(\"Correct ownership\", function() {",
+							"    let attr = pm.response.json().user_id;",
+							"    pm.expect(attr).to.equal(environment['user_id1']);",
+							"});",
+							"",
+							"pm.test(\"Has price\", function() {",
+							"    let attr = pm.response.json().price_usd_open;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"has updated date\", function() {",
+							"    let attr = pm.response.json().last_updated;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds 5 to non-existent asset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1c223a2-f2b6-4439-89dd-d63bac4f044b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/amd",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"amd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds 2nd stock",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "819d11df-9538-4684-acc0-a1209963a005",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":100}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/amd",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"amd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds 3rd",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "819d11df-9538-4684-acc0-a1209963a005",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":100}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/erf",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"erf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc checks owned stocks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1125c2a4-b6c7-4fef-92cb-f3abd9d5ecf3",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Correct number of stocks returned\", function() {",
+							"    let attr = pm.response.json();",
+							"    pm.expect(Object.keys(attr).length).to.equal(3);",
+							"});",
+							"",
+							"pm.test(\"Stocks present in list\", function() {",
+							"    let attr = pm.response.json();",
+							"    pm.expect(attr).to.have.property('wday');",
+							"    pm.expect(attr).to.have.property('erf');",
+							"    pm.expect(attr).to.have.property('amd');",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":100}"
+				},
+				"url": {
+					"raw": "{{env}}/stocks/me",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stocks",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete non-existent asset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1c223a2-f2b6-4439-89dd-d63bac4f044b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{env}}/stock/avawefs",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"avawefs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete asset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "25c2ad00-94ee-4971-962c-e9962956f780",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Asset is at 0\", function() {",
+							"    let attr = pm.response.json().asset_count;",
+							"    pm.expect(attr).to.equal(2);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc checks owned stocks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "63cd1708-add1-4459-8109-27a2a3291e54",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Correct number of stocks returned\", function() {",
+							"    let attr = pm.response.json();",
+							"    pm.expect(Object.keys(attr).length).to.equal(2);",
+							"});",
+							"",
+							"pm.test(\"Stocks present in list\", function() {",
+							"    let attr = pm.response.json();",
+							"    //pm.expect(attr).to.have.property('wday');",
+							"    pm.expect(attr).to.have.property('erf');",
+							"    pm.expect(attr).to.have.property('amd');",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":100}"
+				},
+				"url": {
+					"raw": "{{env}}/stocks/me",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stocks",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc delets 2nd acc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "174489ca-75d3-407f-9397-8c5bbec55ec2",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{env}}/user/{{user_id2}}",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"{{user_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc delets own acc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c56d719c-2ea2-4c3a-9a8b-59671127dbca",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{env}}/user/{{user_id1}}",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify 1st acc deleted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "93270825-2055-4386-91d0-3b3dfb3e98f2",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{env}}/user/{{user_id1}}",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clean up all data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b57f087-d192-4e39-8cbf-21810a03446b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c120c408-52d9-42a5-b97c-ad3f0057b9dc",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{env}}/deleteall",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"deleteall"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "ya29.Glv6Bcpo2tJE4LzJebaowYDlTtOuVgITFFTHznR9hDNVRXZ9CUQKFnq22KwajeQ60CNWquz0XBJq7tB1b0rdNY2dwED1op2On86xc4Pf5vX-1YuqChoxOn1B41va",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9da84503-ed35-4e82-84c0-6f31fd99f158",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "42c2a9de-43f9-4272-88ec-429b678a27c7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
