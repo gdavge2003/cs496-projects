@@ -88,7 +88,7 @@ def GetUserId(token):
 	return check
 
 
-# fetch the requested stock
+# fetch the requested stock. returns array of [price, last updated]
 def GetStockInfo(symbol):
 	result_string = ("https://www.alphavantage.co/query?" +
 	"function=TIME_SERIES_DAILY" +
@@ -103,7 +103,13 @@ def GetStockInfo(symbol):
 		headers={'Content-Type':'application/x-www-form-urlencoded'}
 		)
 
-	return json.loads(results.content)
+	json_results = json.loads(results.content)
+	last_updated = json_results['Meta Data']['3. Last Refreshed'].split()[0]
+	results_dict = {}
+	results_dict['last_updated'] = last_updated
+	reuslts_dict['price'] = json_results['Time Series (Daily)'][last_updated]['1. open']
+
+	return results_dict
 
 
 class AccountHandler(webapp2.RequestHandler):
@@ -190,7 +196,7 @@ class StockAssetHandler(webapp2.RequestHandler):
 				self.response.status = 404
 				self.response.write("Error: Stock doesn't exist. Check Symbol.")
 			else:
-				last_updated = results['Meta Data']['3. Last Refreshed']
+				last_updated = results['Meta Data']['3. Last Refreshed'].split()[0]
 				data = {
 					'symbol': stock_symbol,
 					'price_usd_open': results['Time Series (Daily)'][last_updated]['1. open'],
@@ -229,7 +235,7 @@ class StockAssetHandler(webapp2.RequestHandler):
 			self.response.write("Error: You already own this stock." +
 				"Please use PATCH instead to modify amount or PUT to add amount.")
 		else:
-			last_updated = stock_data['Meta Data']['3. Last Refreshed']
+			last_updated = stock_data['Meta Data']['3. Last Refreshed'].split()[0]
 			stock = StockAsset(
 				user_id=user_id,
 				symbol=stock_symbol,
@@ -250,7 +256,7 @@ class StockAssetHandler(webapp2.RequestHandler):
 	# modify user's current stock assset
 	def patch(self, stock_symbol=None):
 		# get data
-		stock_data = {}#GetStockInfo(stock_symbol)
+		stock_data = GetStockInfo(stock_symbol)
 		token = GetBearerToken(self.request.headers)
 		user_id = GetUserId(token)
 		user_req = json.loads(self.request.body)
@@ -279,7 +285,7 @@ class StockAssetHandler(webapp2.RequestHandler):
 				" it cannot be modified. Please use POST if adding new asset.")
 		else:
 			# update amount, and update other stats from stock server
-			last_updated = stock_data['Meta Data']['3. Last Refreshed']
+			last_updated = stock_data['Meta Data']['3. Last Refreshed'].split()[0]
 			user_stock_data.owned_count = user_req['owned_count']
 			user_stock_data.last_updated = last_updated
 			user_stock_data.price_usd_open = stock_data['Time Series (Daily)'][last_updated]['1. open']
@@ -320,7 +326,7 @@ class StockAssetHandler(webapp2.RequestHandler):
 				" it cannot be added to. Please use POST if adding new asset.")
 		else:
 			# update amount, and update other stats from stock server
-			last_updated = stock_data['Meta Data']['3. Last Refreshed']
+			last_updated = stock_data['Meta Data']['3. Last Refreshed'].split()[0]
 			user_stock_data.owned_count = user_stock_data.owned_count + user_req['owned_count']
 			user_stock_data.last_updated = last_updated
 			user_stock_data.price_usd_open = stock_data['Time Series (Daily)'][last_updated]['1. open']
