@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Stock Stats</title>
+    <link rel="stylesheet" type="text/css" href="static/main.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-EmRcsPP774S9MOi4ywB+JXUWjYnBdyInMzG2XsC5siZEUpexqxOMJW358dCYEjPu" crossorigin="anonymous">
+  </head>
+  <body>
+    <img id="banner" src="static/vacation-banner.jpg">
+
+    <div class="jumbotron">
+      <h1 class="display-3">Your Very Personalized Stocks Logbook</h1>
+      <p class="lead">
+        This serves RESTful APIs to keep track of your stock quotes. To use,
+        simply sign-in below to get your unique token, which you'll need to use
+        in order to make API calls with your account.
+      </p>
+      <p>
+        Note: this is primararily a server backend that serves the APIs for your account.
+         Authenticating below creates a unique account in our database, provides
+         you with a necessary token that ensures your calls are made to your account.
+      </p>
+      <hr class="my-4">
+      <a href="{{ url }}">
+    		<img src="static/google_signin.png" alt="click here to authenticate">
+    	</a>
+  </body>
+</html>
