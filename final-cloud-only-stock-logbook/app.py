@@ -13,15 +13,11 @@ import logging
 from entity import StockAsset, Account
 from handler import AccountHandler, StockAssetHandler, ShowStockAssetHandler, DeleteAll
 
-# for prod:
-# CLIENT_ID = "1011393638628-nqqof6v98h9pu2rnlpimdcnhit63lcih.apps.googleusercontent.com"
-# CLIENT_SECRET = "bs150y1S76z8K4FCG8SKFKIS"
-# REDIRECT_URI = "https://axial-paratext-210920.appspot.com/oauth"
 
-# for debugging
 CLIENT_ID = "239082154858-bm4h8a9dm1au1d6pom1oovqijsfp28ed.apps.googleusercontent.com"
 CLIENT_SECRET = "47gQnq0QGbcySIOa9bPvx85q"
-REDIRECT_URI = "http://localhost:8080/oauth"
+REDIRECT_URI = "https://cs396-final-vaca-1533865861093.appspot.com/oauth"
+# REDIRECT_URI = "http://localhost:8080/oauth"
 
 SCOPE = "email"
 

@@ -45,7 +45,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "132f932b-1ec8-4c9a-ac15-954c89758131",
+						"id": "f92d5e46-0959-4795-a814-db29ac020854",
 						"type": "text/javascript",
 						"exec": [
 							"// NOTE! Before beginning Postman tests, must go to the server and sign in to authenticate, which will create an account in the database server as well as provide the token to be used as a bearer token for all API calls.",
@@ -61,9 +61,9 @@
 							"var user_id2 = '104761727237412172656';",
 							"",
 							"// Set environment",
-							"var env = 'local';",
+							"var env = 'prod';",
 							"var local_url = 'http://localhost:8080';",
-							"var prod_url = '';",
+							"var prod_url = 'https://cs396-final-vaca-1533865861093.appspot.com';",
 							"",
 							"",
 							"// Automated setup for rest of testing",
@@ -100,6 +100,631 @@
 					"path": [
 						"user",
 						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds stock with bad body",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0390322e-f918-4b59-8775-c639314cd716",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"bleh\":23}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds stock w/ bad auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4a33c3da-88f8-4c53-afc9-cbbbf1dc48ab",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "yikes",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":23}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds stock",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d051fb02-a4d9-4f4b-9332-95076922bffa",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Correct stock name\", function() {",
+							"    let attr = pm.response.json().symbol;",
+							"    pm.expect(attr).to.equal(\"wday\");",
+							"});",
+							"",
+							"pm.test(\"Correct amount\", function() {",
+							"    let attr = pm.response.json().owned_count;",
+							"    pm.expect(attr).to.equal(100);",
+							"});",
+							"",
+							"pm.test(\"Correct ownership\", function() {",
+							"    let attr = pm.response.json().user_id;",
+							"    pm.expect(attr).to.equal(environment['user_id1']);",
+							"});",
+							"",
+							"pm.test(\"Has price\", function() {",
+							"    let attr = pm.response.json().price_usd_open;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"has updated date\", function() {",
+							"    let attr = pm.response.json().last_updated;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":100}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds same stock",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1c223a2-f2b6-4439-89dd-d63bac4f044b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":100}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds 2nd stock",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "20587851-95f2-4dbb-925b-49cfa99c03ad",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Correct ownership\", function() {",
+							"    let attr = pm.response.json().user_id;",
+							"    pm.expect(attr).to.equal(environment['user_id1']);",
+							"});",
+							"",
+							"pm.test(\"Correct stock name\", function() {",
+							"    let attr = pm.response.json().symbol;",
+							"    pm.expect(attr).to.equal(\"amd\");",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":100}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/amd",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"amd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc adds 3rd",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b1e4e05-3873-4077-bc0d-5b69a8527058",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Correct ownership\", function() {",
+							"    let attr = pm.response.json().user_id;",
+							"    pm.expect(attr).to.equal(environment['user_id1']);",
+							"});",
+							"",
+							"pm.test(\"Correct stock name\", function() {",
+							"    let attr = pm.response.json().symbol;",
+							"    pm.expect(attr).to.equal(\"erf\");",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":100}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/erf",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"erf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify 1st acc stock asset count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed4afe6e-c1ed-41c8-b375-b241861bb25b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Asset is at 0\", function() {",
+							"    let attr = pm.response.json().asset_count;",
+							"    pm.expect(attr).to.equal(3);",
+							"});",
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "69b5790f-dc4b-4294-8b40-893bf27441d1",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/user/{{user_id1}}",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"user",
+						"{{user_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1st acc checks owned stocks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1125c2a4-b6c7-4fef-92cb-f3abd9d5ecf3",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Correct number of stocks returned\", function() {",
+							"    let attr = pm.response.json();",
+							"    pm.expect(Object.keys(attr).length).to.equal(3);",
+							"});",
+							"",
+							"pm.test(\"Stocks present in list\", function() {",
+							"    let attr = pm.response.json();",
+							"    pm.expect(attr).to.have.property('wday');",
+							"    pm.expect(attr).to.have.property('erf');",
+							"    pm.expect(attr).to.have.property('amd');",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owned_count\":100}"
+				},
+				"url": {
+					"raw": "{{env}}/stocks/me",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stocks",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get valid stock info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bcdc3205-183d-4154-adab-28f048c529e2",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Correct stock name\", function() {",
+							"    let attr = pm.response.json().symbol;",
+							"    pm.expect(attr).to.equal(\"wday\");",
+							"});",
+							"",
+							"pm.test(\"Has price\", function() {",
+							"    let attr = pm.response.json().price_usd_open;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"has updated date\", function() {",
+							"    let attr = pm.response.json().last_updated;",
+							"    pm.expect(attr.length).to.be.above(0);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/wday",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"wday"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get invalid stock info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "734a00a2-47cc-4f52-be4a-781462d24639",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/vasfawerawetagwegta",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						"vasfawerawetagwegta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify 400 no stock specified",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0390322e-f918-4b59-8775-c639314cd716",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
+				},
+				"url": {
+					"raw": "{{env}}/stock/",
+					"host": [
+						"{{env}}"
+					],
+					"path": [
+						"stock",
+						""
 					]
 				}
 			},
@@ -335,7 +960,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "be082551-908c-49dd-a6e9-852d82da4983",
+						"id": "4ade80f3-45a6-4fde-a5c9-a8f548bbfd89",
 						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Correct name update\", function() {",
@@ -355,7 +980,7 @@
 							"",
 							"pm.test(\"Asset count does not update\", function() {",
 							"    let attr = pm.response.json().asset_count;",
-							"    pm.expect(attr).to.equal(0);",
+							"    pm.expect(attr).to.equal(3);",
 							"});",
 							"",
 							"pm.test(\"User ID does not update\", function() {",
@@ -627,468 +1252,16 @@
 			"response": []
 		},
 		{
-			"name": "get valid stock info",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "bcdc3205-183d-4154-adab-28f048c529e2",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Correct stock name\", function() {",
-							"    let attr = pm.response.json().symbol;",
-							"    pm.expect(attr).to.equal(\"wday\");",
-							"});",
-							"",
-							"pm.test(\"Has price\", function() {",
-							"    let attr = pm.response.json().price_usd_open;",
-							"    pm.expect(attr.length).to.be.above(0);",
-							"});",
-							"",
-							"pm.test(\"has updated date\", function() {",
-							"    let attr = pm.response.json().last_updated;",
-							"    pm.expect(attr.length).to.be.above(0);",
-							"});"
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
-				},
-				"url": {
-					"raw": "{{env}}/stock/wday",
-					"host": [
-						"{{env}}"
-					],
-					"path": [
-						"stock",
-						"wday"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get invalid stock info",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "734a00a2-47cc-4f52-be4a-781462d24639",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Status code is 404\", function () {",
-							"    pm.response.to.have.status(404);",
-							"});"
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
-				},
-				"url": {
-					"raw": "{{env}}/stock/vasfawerawetagwegta",
-					"host": [
-						"{{env}}"
-					],
-					"path": [
-						"stock",
-						"vasfawerawetagwegta"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "verify 400 no stock specified",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "0390322e-f918-4b59-8775-c639314cd716",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Status code is 400\", function () {",
-							"    pm.response.to.have.status(400);",
-							"});"
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
-				},
-				"url": {
-					"raw": "{{env}}/stock/",
-					"host": [
-						"{{env}}"
-					],
-					"path": [
-						"stock",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "1st acc adds stock with bad body",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "0390322e-f918-4b59-8775-c639314cd716",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Status code is 400\", function () {",
-							"    pm.response.to.have.status(400);",
-							"});"
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"bleh\":23}"
-				},
-				"url": {
-					"raw": "{{env}}/stock/wday",
-					"host": [
-						"{{env}}"
-					],
-					"path": [
-						"stock",
-						"wday"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "1st acc adds stock w/ bad auth",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "4a33c3da-88f8-4c53-afc9-cbbbf1dc48ab",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Status code is 401\", function () {",
-							"    pm.response.to.have.status(401);",
-							"});"
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "yikes",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"owned_count\":23}"
-				},
-				"url": {
-					"raw": "{{env}}/stock/wday",
-					"host": [
-						"{{env}}"
-					],
-					"path": [
-						"stock",
-						"wday"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "1st acc adds stock",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "d051fb02-a4d9-4f4b-9332-95076922bffa",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Correct stock name\", function() {",
-							"    let attr = pm.response.json().symbol;",
-							"    pm.expect(attr).to.equal(\"wday\");",
-							"});",
-							"",
-							"pm.test(\"Correct amount\", function() {",
-							"    let attr = pm.response.json().owned_count;",
-							"    pm.expect(attr).to.equal(100);",
-							"});",
-							"",
-							"pm.test(\"Correct ownership\", function() {",
-							"    let attr = pm.response.json().user_id;",
-							"    pm.expect(attr).to.equal(environment['user_id1']);",
-							"});",
-							"",
-							"pm.test(\"Has price\", function() {",
-							"    let attr = pm.response.json().price_usd_open;",
-							"    pm.expect(attr.length).to.be.above(0);",
-							"});",
-							"",
-							"pm.test(\"has updated date\", function() {",
-							"    let attr = pm.response.json().last_updated;",
-							"    pm.expect(attr.length).to.be.above(0);",
-							"});"
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"owned_count\":100}"
-				},
-				"url": {
-					"raw": "{{env}}/stock/wday",
-					"host": [
-						"{{env}}"
-					],
-					"path": [
-						"stock",
-						"wday"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "1st acc adds same stock",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "e1c223a2-f2b6-4439-89dd-d63bac4f044b",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Status code is 400\", function () {",
-							"    pm.response.to.have.status(400);",
-							"});"
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"owned_count\":100}"
-				},
-				"url": {
-					"raw": "{{env}}/stock/wday",
-					"host": [
-						"{{env}}"
-					],
-					"path": [
-						"stock",
-						"wday"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "verify 1st acc stock asset count",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "98a18a85-f72e-416f-a896-49b9fab3e029",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Asset is at 0\", function() {",
-							"    let attr = pm.response.json().asset_count;",
-							"    pm.expect(attr).to.equal(1);",
-							"});",
-							""
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "69b5790f-dc4b-4294-8b40-893bf27441d1",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"name\":\"AAAAA\",\"type\":\"Fighter\",\"length\":5}"
-				},
-				"url": {
-					"raw": "{{env}}/user/{{user_id1}}",
-					"host": [
-						"{{env}}"
-					],
-					"path": [
-						"user",
-						"{{user_id1}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "1st acc modifies non-existent asset",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "e1c223a2-f2b6-4439-89dd-d63bac4f044b",
+						"id": "af7e2898-61c3-44c5-9202-385791e30a84",
 						"type": "text/javascript",
 						"exec": [
-							"pm.test(\"Status code is 400\", function () {",
-							"    pm.response.to.have.status(400);",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
 							"});"
 						]
 					}
@@ -1117,13 +1290,13 @@
 					"raw": "{\"owned_count\":50}"
 				},
 				"url": {
-					"raw": "{{env}}/stock/erf",
+					"raw": "{{env}}/stock/asdfsdf",
 					"host": [
 						"{{env}}"
 					],
 					"path": [
 						"stock",
-						"erf"
+						"asdfsdf"
 					]
 				}
 			},
@@ -1279,11 +1452,11 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "e1c223a2-f2b6-4439-89dd-d63bac4f044b",
+						"id": "ad2ec319-d3be-4975-873d-c671e8bb26df",
 						"type": "text/javascript",
 						"exec": [
-							"pm.test(\"Status code is 400\", function () {",
-							"    pm.response.to.have.status(400);",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
 							"});"
 						]
 					}
@@ -1312,170 +1485,13 @@
 					"raw": "{\"owned_count\":5}"
 				},
 				"url": {
-					"raw": "{{env}}/stock/amd",
+					"raw": "{{env}}/stock/dfbsr",
 					"host": [
 						"{{env}}"
 					],
 					"path": [
 						"stock",
-						"amd"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "1st acc adds 2nd stock",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "819d11df-9538-4684-acc0-a1209963a005",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"owned_count\":100}"
-				},
-				"url": {
-					"raw": "{{env}}/stock/amd",
-					"host": [
-						"{{env}}"
-					],
-					"path": [
-						"stock",
-						"amd"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "1st acc adds 3rd",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "819d11df-9538-4684-acc0-a1209963a005",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"owned_count\":100}"
-				},
-				"url": {
-					"raw": "{{env}}/stock/erf",
-					"host": [
-						"{{env}}"
-					],
-					"path": [
-						"stock",
-						"erf"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "1st acc checks owned stocks",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "1125c2a4-b6c7-4fef-92cb-f3abd9d5ecf3",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Correct number of stocks returned\", function() {",
-							"    let attr = pm.response.json();",
-							"    pm.expect(Object.keys(attr).length).to.equal(3);",
-							"});",
-							"",
-							"pm.test(\"Stocks present in list\", function() {",
-							"    let attr = pm.response.json();",
-							"    pm.expect(attr).to.have.property('wday');",
-							"    pm.expect(attr).to.have.property('erf');",
-							"    pm.expect(attr).to.have.property('amd');",
-							"});"
-						]
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "cc37588a-0ce3-4ede-830a-0bccdcc70646",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"owned_count\":100}"
-				},
-				"url": {
-					"raw": "{{env}}/stocks/me",
-					"host": [
-						"{{env}}"
-					],
-					"path": [
-						"stocks",
-						"me"
+						"dfbsr"
 					]
 				}
 			},
@@ -1840,7 +1856,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "ya29.Glv6Bcpo2tJE4LzJebaowYDlTtOuVgITFFTHznR9hDNVRXZ9CUQKFnq22KwajeQ60CNWquz0XBJq7tB1b0rdNY2dwED1op2On86xc4Pf5vX-1YuqChoxOn1B41va",
+				"value": "",
 				"type": "string"
 			}
 		]

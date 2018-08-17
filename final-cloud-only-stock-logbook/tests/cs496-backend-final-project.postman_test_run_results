@@ -1,0 +1,2155 @@
+{
+	"id": "fdb852a5-cb4a-4119-aed0-8ee0b9f3ade8",
+	"name": "cs496-backend-final-project",
+	"allTests": [],
+	"timestamp": "2018-08-17T01:39:51.539Z",
+	"collection_id": "4dbaaa39-b9e4-48d0-9cf9-edae73264a1c",
+	"folder_id": 0,
+	"target_type": "collection",
+	"environment_id": "f50bfc26-6d00-45e8-9d8d-cc8810fe9df5",
+	"data": [],
+	"delay": 3000,
+	"count": 1,
+	"collection": {
+		"id": "4dbaaa39-b9e4-48d0-9cf9-edae73264a1c",
+		"name": "cs496-backend-final-project",
+		"description": "",
+		"auth": {
+			"type": "bearer",
+			"bearer": [
+				{
+					"key": "token",
+					"value": "ya29.Glv8BR-XAkjICDeXvJ7VXUa2xY1oMRZST4BmMWbcm7PVR7kNjYs9dZxfW1-dY_-O_zz_evHKUthCJ93k9clPVphq9blV3JxQXM8Gm5ZLCAaU0bSqUCtPjf75TEz2"
+				}
+			]
+		},
+		"events": [
+			{
+				"listen": "prerequest",
+				"script": {
+					"id": "9da84503-ed35-4e82-84c0-6f31fd99f158",
+					"type": "text/javascript",
+					"exec": [
+						""
+					]
+				}
+			},
+			{
+				"listen": "test",
+				"script": {
+					"id": "42c2a9de-43f9-4272-88ec-429b678a27c7",
+					"type": "text/javascript",
+					"exec": [
+						""
+					]
+				}
+			}
+		],
+		"variables": [],
+		"order": [
+			"fe6b9423-2344-4ed3-82f2-9f351b256841",
+			"bcc9b3f3-41d4-4324-be0c-1de940efa65c",
+			"a644507d-b1df-4695-a469-ddd001a8a483",
+			"7a365bb1-eef1-4fe1-ad35-15acf7e04ea3",
+			"45fecb2b-fd38-4401-ac15-38fa621b0b3b",
+			"92bbb683-91bd-4282-8fa7-6fe407f59c01",
+			"07ada09c-112b-4c48-a37d-adcf15f62b72",
+			"7f0e2a62-c0e9-43b6-88ef-81a884bee037",
+			"04b78f00-3ba5-4744-a91c-eafd07e9b82d",
+			"a404f08d-5086-4a29-a17d-30974a0eb724",
+			"2bd22ed1-35c7-4ea7-8c2c-b4948a4ee8ff",
+			"b63967e0-85ab-4667-afbc-8866a0134d74",
+			"6487b286-fbd4-416c-899a-24e607f46d54",
+			"ea98c7aa-48a6-4fa8-93c6-3237df1d0f9f",
+			"68a36d9d-1d85-4201-87d8-009b38ad209f",
+			"ed0a417d-329c-40ca-9de1-31fda07a8e04",
+			"26741d59-4f6a-45cf-b73c-571a6068f41e",
+			"3a2c967c-4ed9-4f42-9ef7-05fceeff7621",
+			"3a1bed06-c3e5-4297-a5c4-ae45be47f122",
+			"b0a27eb3-fb27-4130-880b-5661a815f257",
+			"2c884870-4c08-4859-9a34-91c089c5b433",
+			"480c0d36-c37e-4e61-bd89-627eaf000a3a",
+			"b03646e4-33d5-40b2-8240-3f54c9a517b0",
+			"e243127d-3f95-444b-8dcb-7f7700a9216b",
+			"4bb4b2bf-6569-4af8-9065-d1e5698ff2d0",
+			"9e51fb11-5e13-4603-b4ca-c9a48e689f4d",
+			"bb851e48-e463-4b0e-b9cd-571a04606045",
+			"a2c87179-566c-4ec6-864f-215b3ee9ec2b",
+			"6b6f9547-d685-4b31-8bac-d4cddf68aa14",
+			"1f768879-9d8c-4f77-a6d6-d626c3010677",
+			"c76234e1-d270-42cf-9f02-370e7aeff5bf",
+			"0d4a0773-9ecc-4acc-adfa-06a31a80761c"
+		],
+		"folders_order": [],
+		"owner": "4768636",
+		"permissions": {},
+		"favorite": false,
+		"shared": false,
+		"type": "collection",
+		"depth": 0
+	},
+	"folder": null,
+	"environment": null,
+	"globals": [],
+	"results": [
+		{
+			"name": "verify 1st account existence",
+			"id": "fe6b9423-2344-4ed3-82f2-9f351b256841",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/114026605854446138844",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Response has name attribute",
+				"status": "pass",
+				"Response has occuption attribute": true,
+				"Response has email attribute": true,
+				"Asset is at 0": true,
+				"User ID matches": true
+			},
+			"testPassFailCounts": {
+				"Response has name attribute": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has occuption attribute": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has email attribute": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asset is at 0": {
+					"pass": 1,
+					"fail": 0
+				},
+				"User ID matches": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"46"
+			],
+			"allTests": [
+				{
+					"Response has name attribute": true,
+					"Response has occuption attribute": true,
+					"Response has email attribute": true,
+					"Asset is at 0": true,
+					"User ID matches": true
+				}
+			],
+			"time": "46",
+			"totalRequestTime": "46",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc adds stock with bad body",
+			"id": "bcc9b3f3-41d4-4324-be0c-1de940efa65c",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"tests": {
+				"name": "Status code is 400",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1378"
+			],
+			"allTests": [
+				{
+					"Status code is 400": true
+				}
+			],
+			"time": "1378",
+			"totalRequestTime": "1378",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc adds stock w/ bad auth",
+			"id": "a644507d-b1df-4695-a469-ddd001a8a483",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized",
+				"detail": {
+					"name": "Unauthorized",
+					"detail": "Similar to 403 Forbidden, but specifically for use when authentication is possible but has failed or not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource."
+				}
+			},
+			"tests": {
+				"name": "Status code is 401",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1024"
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			],
+			"time": "1024",
+			"totalRequestTime": "1024",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc adds stock",
+			"id": "7a365bb1-eef1-4fe1-ad35-15acf7e04ea3",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Correct stock name",
+				"status": "pass",
+				"Correct amount": true,
+				"Correct ownership": true,
+				"Has price": true,
+				"has updated date": true
+			},
+			"testPassFailCounts": {
+				"Correct stock name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct amount": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct ownership": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has price": {
+					"pass": 1,
+					"fail": 0
+				},
+				"has updated date": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1428"
+			],
+			"allTests": [
+				{
+					"Correct stock name": true,
+					"Correct amount": true,
+					"Correct ownership": true,
+					"Has price": true,
+					"has updated date": true
+				}
+			],
+			"time": "1428",
+			"totalRequestTime": "1428",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc adds same stock",
+			"id": "45fecb2b-fd38-4401-ac15-38fa621b0b3b",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"tests": {
+				"name": "Status code is 400",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"855"
+			],
+			"allTests": [
+				{
+					"Status code is 400": true
+				}
+			],
+			"time": "855",
+			"totalRequestTime": "855",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc adds 2nd stock",
+			"id": "92bbb683-91bd-4282-8fa7-6fe407f59c01",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/amd",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Correct ownership",
+				"status": "pass",
+				"Correct stock name": true
+			},
+			"testPassFailCounts": {
+				"Correct ownership": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct stock name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1354"
+			],
+			"allTests": [
+				{
+					"Correct ownership": true,
+					"Correct stock name": true
+				}
+			],
+			"time": "1354",
+			"totalRequestTime": "1354",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc adds 3rd",
+			"id": "07ada09c-112b-4c48-a37d-adcf15f62b72",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/erf",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Correct ownership",
+				"status": "pass",
+				"Correct stock name": true
+			},
+			"testPassFailCounts": {
+				"Correct ownership": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct stock name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1003"
+			],
+			"allTests": [
+				{
+					"Correct ownership": true,
+					"Correct stock name": true
+				}
+			],
+			"time": "1003",
+			"totalRequestTime": "1003",
+			"iterationResults": {}
+		},
+		{
+			"name": "verify 1st acc stock asset count",
+			"id": "7f0e2a62-c0e9-43b6-88ef-81a884bee037",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/114026605854446138844",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Asset is at 0",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Asset is at 0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"64"
+			],
+			"allTests": [
+				{
+					"Asset is at 0": true
+				}
+			],
+			"time": "64",
+			"totalRequestTime": "64",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc checks owned stocks",
+			"id": "04b78f00-3ba5-4744-a91c-eafd07e9b82d",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stocks/me",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Correct number of stocks returned",
+				"status": "pass",
+				"Stocks present in list": true
+			},
+			"testPassFailCounts": {
+				"Correct number of stocks returned": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Stocks present in list": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"214"
+			],
+			"allTests": [
+				{
+					"Correct number of stocks returned": true,
+					"Stocks present in list": true
+				}
+			],
+			"time": "214",
+			"totalRequestTime": "214",
+			"iterationResults": {}
+		},
+		{
+			"name": "get valid stock info",
+			"id": "a404f08d-5086-4a29-a17d-30974a0eb724",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Correct stock name",
+				"status": "pass",
+				"Has price": true,
+				"has updated date": true
+			},
+			"testPassFailCounts": {
+				"Correct stock name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has price": {
+					"pass": 1,
+					"fail": 0
+				},
+				"has updated date": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1012"
+			],
+			"allTests": [
+				{
+					"Correct stock name": true,
+					"Has price": true,
+					"has updated date": true
+				}
+			],
+			"time": "1012",
+			"totalRequestTime": "1012",
+			"iterationResults": {}
+		},
+		{
+			"name": "get invalid stock info",
+			"id": "2bd22ed1-35c7-4ea7-8c2c-b4948a4ee8ff",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/vasfawerawetagwegta",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"tests": {
+				"name": "Status code is 404",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1201"
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			],
+			"time": "1201",
+			"totalRequestTime": "1201",
+			"iterationResults": {}
+		},
+		{
+			"name": "verify 400 no stock specified",
+			"id": "b63967e0-85ab-4667-afbc-8866a0134d74",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"tests": {
+				"name": "Status code is 400",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"29"
+			],
+			"allTests": [
+				{
+					"Status code is 400": true
+				}
+			],
+			"time": "29",
+			"totalRequestTime": "29",
+			"iterationResults": {}
+		},
+		{
+			"name": "verify 2nd account exist",
+			"id": "6487b286-fbd4-416c-899a-24e607f46d54",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/104761727237412172656",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Response has name attribute",
+				"status": "pass",
+				"Response has occuption attribute": true,
+				"Response has email attribute": true,
+				"Asset is at 0": true,
+				"User ID matches": true
+			},
+			"testPassFailCounts": {
+				"Response has name attribute": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has occuption attribute": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has email attribute": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asset is at 0": {
+					"pass": 1,
+					"fail": 0
+				},
+				"User ID matches": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"41"
+			],
+			"allTests": [
+				{
+					"Response has name attribute": true,
+					"Response has occuption attribute": true,
+					"Response has email attribute": true,
+					"Asset is at 0": true,
+					"User ID matches": true
+				}
+			],
+			"time": "41",
+			"totalRequestTime": "41",
+			"iterationResults": {}
+		},
+		{
+			"name": "verify 400 w/ no user id",
+			"id": "ea98c7aa-48a6-4fa8-93c6-3237df1d0f9f",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"tests": {
+				"name": "Status code is 400",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"42"
+			],
+			"allTests": [
+				{
+					"Status code is 400": true
+				}
+			],
+			"time": "42",
+			"totalRequestTime": "42",
+			"iterationResults": {}
+		},
+		{
+			"name": "verify 404 with nonexistant user id",
+			"id": "68a36d9d-1d85-4201-87d8-009b38ad209f",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/111",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"tests": {
+				"name": "Status code is 404",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"50"
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			],
+			"time": "50",
+			"totalRequestTime": "50",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st account modifies self",
+			"id": "ed0a417d-329c-40ca-9de1-31fda07a8e04",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/114026605854446138844",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {},
+			"times": [
+				"305"
+			],
+			"allTests": [
+				{}
+			],
+			"time": "305",
+			"totalRequestTime": "305",
+			"iterationResults": {}
+		},
+		{
+			"name": "verify 1st account update",
+			"id": "26741d59-4f6a-45cf-b73c-571a6068f41e",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/114026605854446138844",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Correct name update",
+				"status": "pass",
+				"Correct occupation update": true,
+				"Correct email update": true,
+				"Asset count does not update": true,
+				"User ID does not update": true
+			},
+			"testPassFailCounts": {
+				"Correct name update": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct occupation update": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct email update": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asset count does not update": {
+					"pass": 1,
+					"fail": 0
+				},
+				"User ID does not update": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"43"
+			],
+			"allTests": [
+				{
+					"Correct name update": true,
+					"Correct occupation update": true,
+					"Correct email update": true,
+					"Asset count does not update": true,
+					"User ID does not update": true
+				}
+			],
+			"time": "43",
+			"totalRequestTime": "43",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc modifies 2nd acc",
+			"id": "3a2c967c-4ed9-4f42-9ef7-05fceeff7621",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/104761727237412172656",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized",
+				"detail": {
+					"name": "Unauthorized",
+					"detail": "Similar to 403 Forbidden, but specifically for use when authentication is possible but has failed or not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource."
+				}
+			},
+			"tests": {
+				"name": "Status code is 401",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"207"
+			],
+			"allTests": [
+				{
+					"Status code is 401": true
+				}
+			],
+			"time": "207",
+			"totalRequestTime": "207",
+			"iterationResults": {}
+		},
+		{
+			"name": "verify 2nd acc didn't change",
+			"id": "3a1bed06-c3e5-4297-a5c4-ae45be47f122",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/104761727237412172656",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Name did not change",
+				"status": "pass",
+				"Occupation did not change": true,
+				"Email did not change": true,
+				"Asset count does not update": true,
+				"User ID does not update": true
+			},
+			"testPassFailCounts": {
+				"Name did not change": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Occupation did not change": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email did not change": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asset count does not update": {
+					"pass": 1,
+					"fail": 0
+				},
+				"User ID does not update": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"149"
+			],
+			"allTests": [
+				{
+					"Name did not change": true,
+					"Occupation did not change": true,
+					"Email did not change": true,
+					"Asset count does not update": true,
+					"User ID does not update": true
+				}
+			],
+			"time": "149",
+			"totalRequestTime": "149",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc modifies nonexistent id",
+			"id": "b0a27eb3-fb27-4130-880b-5661a815f257",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/123",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"tests": {
+				"name": "Status code is 404",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"56"
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			],
+			"time": "56",
+			"totalRequestTime": "56",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc modifies no id",
+			"id": "2c884870-4c08-4859-9a34-91c089c5b433",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"tests": {
+				"name": "Status code is 400",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"32"
+			],
+			"allTests": [
+				{
+					"Status code is 400": true
+				}
+			],
+			"time": "32",
+			"totalRequestTime": "32",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc modifies non-existent asset",
+			"id": "480c0d36-c37e-4e61-bd89-627eaf000a3a",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/asdfsdf",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"tests": {
+				"name": "Status code is 404",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1566"
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			],
+			"time": "1566",
+			"totalRequestTime": "1566",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc modifies asset",
+			"id": "b03646e4-33d5-40b2-8240-3f54c9a517b0",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Correct stock name",
+				"status": "pass",
+				"Correct updated amount": true,
+				"Correct ownership": true,
+				"Has price": true,
+				"has updated date": true
+			},
+			"testPassFailCounts": {
+				"Correct stock name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct updated amount": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct ownership": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has price": {
+					"pass": 1,
+					"fail": 0
+				},
+				"has updated date": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1244"
+			],
+			"allTests": [
+				{
+					"Correct stock name": true,
+					"Correct updated amount": true,
+					"Correct ownership": true,
+					"Has price": true,
+					"has updated date": true
+				}
+			],
+			"time": "1244",
+			"totalRequestTime": "1244",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc adds 5 to asset",
+			"id": "e243127d-3f95-444b-8dcb-7f7700a9216b",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Correct stock name",
+				"status": "pass",
+				"Correct updated amount": true,
+				"Correct ownership": true,
+				"Has price": true,
+				"has updated date": true
+			},
+			"testPassFailCounts": {
+				"Correct stock name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct updated amount": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct ownership": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has price": {
+					"pass": 1,
+					"fail": 0
+				},
+				"has updated date": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1673"
+			],
+			"allTests": [
+				{
+					"Correct stock name": true,
+					"Correct updated amount": true,
+					"Correct ownership": true,
+					"Has price": true,
+					"has updated date": true
+				}
+			],
+			"time": "1673",
+			"totalRequestTime": "1673",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc adds 5 to non-existent asset",
+			"id": "4bb4b2bf-6569-4af8-9065-d1e5698ff2d0",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/dfbsr",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"tests": {
+				"name": "Status code is 404",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"1684"
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			],
+			"time": "1684",
+			"totalRequestTime": "1684",
+			"iterationResults": {}
+		},
+		{
+			"name": "delete non-existent asset",
+			"id": "9e51fb11-5e13-4603-b4ca-c9a48e689f4d",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/avawefs",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"tests": {
+				"name": "Status code is 400",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"264"
+			],
+			"allTests": [
+				{
+					"Status code is 400": true
+				}
+			],
+			"time": "264",
+			"totalRequestTime": "264",
+			"iterationResults": {}
+		},
+		{
+			"name": "delete asset",
+			"id": "bb851e48-e463-4b0e-b9cd-571a04606045",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Asset is at 0",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Asset is at 0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"406"
+			],
+			"allTests": [
+				{
+					"Asset is at 0": true
+				}
+			],
+			"time": "406",
+			"totalRequestTime": "406",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc checks owned stocks",
+			"id": "a2c87179-566c-4ec6-864f-215b3ee9ec2b",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stocks/me",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Correct number of stocks returned",
+				"status": "pass",
+				"Stocks present in list": true
+			},
+			"testPassFailCounts": {
+				"Correct number of stocks returned": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Stocks present in list": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"256"
+			],
+			"allTests": [
+				{
+					"Correct number of stocks returned": true,
+					"Stocks present in list": true
+				}
+			],
+			"time": "256",
+			"totalRequestTime": "256",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc delets 2nd acc",
+			"id": "6b6f9547-d685-4b31-8bac-d4cddf68aa14",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/104761727237412172656",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized",
+				"detail": {
+					"name": "Unauthorized",
+					"detail": "Similar to 403 Forbidden, but specifically for use when authentication is possible but has failed or not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource."
+				}
+			},
+			"tests": {
+				"name": "Status code is 404",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"790"
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			],
+			"time": "790",
+			"totalRequestTime": "790",
+			"iterationResults": {}
+		},
+		{
+			"name": "1st acc delets own acc",
+			"id": "1f768879-9d8c-4f77-a6d6-d626c3010677",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/114026605854446138844",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {},
+			"times": [
+				"377"
+			],
+			"allTests": [
+				{}
+			],
+			"time": "377",
+			"totalRequestTime": "377",
+			"iterationResults": {}
+		},
+		{
+			"name": "verify 1st acc deleted",
+			"id": "c76234e1-d270-42cf-9f02-370e7aeff5bf",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/114026605854446138844",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"tests": {
+				"name": "Status code is 404",
+				"status": "pass"
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"43"
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			],
+			"time": "43",
+			"totalRequestTime": "43",
+			"iterationResults": {}
+		},
+		{
+			"name": "clean up all data",
+			"id": "0d4a0773-9ecc-4acc-adfa-06a31a80761c",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/deleteall",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {},
+			"times": [
+				"161"
+			],
+			"allTests": [
+				{}
+			],
+			"time": "161",
+			"totalRequestTime": "161",
+			"iterationResults": {}
+		}
+	],
+	"totalPass": 63,
+	"totalFail": 0,
+	"totalTime": 18997,
+	"lifecycle": "done",
+	"requests": [
+		{
+			"name": "verify 1st account existence",
+			"id": "fe6b9423-2344-4ed3-82f2-9f351b256841",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/114026605854446138844",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Response has name attribute": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has occuption attribute": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has email attribute": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asset is at 0": {
+					"pass": 1,
+					"fail": 0
+				},
+				"User ID matches": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc adds stock with bad body",
+			"id": "bcc9b3f3-41d4-4324-be0c-1de940efa65c",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc adds stock w/ bad auth",
+			"id": "a644507d-b1df-4695-a469-ddd001a8a483",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized",
+				"detail": {
+					"name": "Unauthorized",
+					"detail": "Similar to 403 Forbidden, but specifically for use when authentication is possible but has failed or not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc adds stock",
+			"id": "7a365bb1-eef1-4fe1-ad35-15acf7e04ea3",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Correct stock name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct amount": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct ownership": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has price": {
+					"pass": 1,
+					"fail": 0
+				},
+				"has updated date": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc adds same stock",
+			"id": "45fecb2b-fd38-4401-ac15-38fa621b0b3b",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc adds 2nd stock",
+			"id": "92bbb683-91bd-4282-8fa7-6fe407f59c01",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/amd",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Correct ownership": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct stock name": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc adds 3rd",
+			"id": "07ada09c-112b-4c48-a37d-adcf15f62b72",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/erf",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Correct ownership": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct stock name": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "verify 1st acc stock asset count",
+			"id": "7f0e2a62-c0e9-43b6-88ef-81a884bee037",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/114026605854446138844",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Asset is at 0": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc checks owned stocks",
+			"id": "04b78f00-3ba5-4744-a91c-eafd07e9b82d",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stocks/me",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Correct number of stocks returned": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Stocks present in list": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "get valid stock info",
+			"id": "a404f08d-5086-4a29-a17d-30974a0eb724",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Correct stock name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has price": {
+					"pass": 1,
+					"fail": 0
+				},
+				"has updated date": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "get invalid stock info",
+			"id": "2bd22ed1-35c7-4ea7-8c2c-b4948a4ee8ff",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/vasfawerawetagwegta",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "verify 400 no stock specified",
+			"id": "b63967e0-85ab-4667-afbc-8866a0134d74",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "verify 2nd account exist",
+			"id": "6487b286-fbd4-416c-899a-24e607f46d54",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/104761727237412172656",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Response has name attribute": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has occuption attribute": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has email attribute": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asset is at 0": {
+					"pass": 1,
+					"fail": 0
+				},
+				"User ID matches": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "verify 400 w/ no user id",
+			"id": "ea98c7aa-48a6-4fa8-93c6-3237df1d0f9f",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "verify 404 with nonexistant user id",
+			"id": "68a36d9d-1d85-4201-87d8-009b38ad209f",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/111",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st account modifies self",
+			"id": "ed0a417d-329c-40ca-9de1-31fda07a8e04",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/114026605854446138844",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {}
+		},
+		{
+			"name": "verify 1st account update",
+			"id": "26741d59-4f6a-45cf-b73c-571a6068f41e",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/114026605854446138844",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Correct name update": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct occupation update": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct email update": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asset count does not update": {
+					"pass": 1,
+					"fail": 0
+				},
+				"User ID does not update": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc modifies 2nd acc",
+			"id": "3a2c967c-4ed9-4f42-9ef7-05fceeff7621",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/104761727237412172656",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized",
+				"detail": {
+					"name": "Unauthorized",
+					"detail": "Similar to 403 Forbidden, but specifically for use when authentication is possible but has failed or not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "verify 2nd acc didn't change",
+			"id": "3a1bed06-c3e5-4297-a5c4-ae45be47f122",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/104761727237412172656",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Name did not change": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Occupation did not change": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Email did not change": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Asset count does not update": {
+					"pass": 1,
+					"fail": 0
+				},
+				"User ID does not update": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc modifies nonexistent id",
+			"id": "b0a27eb3-fb27-4130-880b-5661a815f257",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/123",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc modifies no id",
+			"id": "2c884870-4c08-4859-9a34-91c089c5b433",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc modifies non-existent asset",
+			"id": "480c0d36-c37e-4e61-bd89-627eaf000a3a",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/asdfsdf",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc modifies asset",
+			"id": "b03646e4-33d5-40b2-8240-3f54c9a517b0",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Correct stock name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct updated amount": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct ownership": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has price": {
+					"pass": 1,
+					"fail": 0
+				},
+				"has updated date": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc adds 5 to asset",
+			"id": "e243127d-3f95-444b-8dcb-7f7700a9216b",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Correct stock name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct updated amount": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Correct ownership": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has price": {
+					"pass": 1,
+					"fail": 0
+				},
+				"has updated date": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc adds 5 to non-existent asset",
+			"id": "4bb4b2bf-6569-4af8-9065-d1e5698ff2d0",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/dfbsr",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "delete non-existent asset",
+			"id": "9e51fb11-5e13-4603-b4ca-c9a48e689f4d",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/avawefs",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request",
+				"detail": {
+					"name": "Bad Request",
+					"detail": "The request cannot be fulfilled due to bad syntax."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "delete asset",
+			"id": "bb851e48-e463-4b0e-b9cd-571a04606045",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stock/wday",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Asset is at 0": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc checks owned stocks",
+			"id": "a2c87179-566c-4ec6-864f-215b3ee9ec2b",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/stocks/me",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Correct number of stocks returned": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Stocks present in list": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc delets 2nd acc",
+			"id": "6b6f9547-d685-4b31-8bac-d4cddf68aa14",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/104761727237412172656",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized",
+				"detail": {
+					"name": "Unauthorized",
+					"detail": "Similar to 403 Forbidden, but specifically for use when authentication is possible but has failed or not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "1st acc delets own acc",
+			"id": "1f768879-9d8c-4f77-a6d6-d626c3010677",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/114026605854446138844",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {}
+		},
+		{
+			"name": "verify 1st acc deleted",
+			"id": "c76234e1-d270-42cf-9f02-370e7aeff5bf",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/user/114026605854446138844",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found",
+				"detail": {
+					"name": "Not Found",
+					"detail": "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "clean up all data",
+			"id": "0d4a0773-9ecc-4acc-adfa-06a31a80761c",
+			"url": "https://cs396-final-vaca-1533865861093.appspot.com/deleteall",
+			"time": "2018-08-17T01:39:51.539Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {}
+		}
+	],
+	"synced": false
+}
